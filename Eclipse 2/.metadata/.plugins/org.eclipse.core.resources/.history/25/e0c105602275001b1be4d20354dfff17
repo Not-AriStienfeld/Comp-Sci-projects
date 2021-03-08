@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+
+//Project Name: ArrayLists Project
+//Project Description: Creates an array list of bank accounts and modifies them
+//Date: Feb 9, 2021
+//Written By: Ari Steinfeld
+public class BankAccountMain {
+
+	public static void main(String[] args) {
+		ArrayList <BankAccount> accounts = new ArrayList<>();
+		for (int i = 0; i < 100; i++) {
+			accounts.add(new BankAccount(i+1001,(int) (Math.random() * 1000000)));
+		}
+		
+		System.out.println("Accounts that are getting removed: ");
+		for (int i = accounts.size()-1; i >=0; i--) {
+			if (accounts.get(i).getBalance() < 250000) {
+				System.out.println(accounts.get(i).toString());
+				accounts.remove(i);			
+			}
+		}
+		
+		System.out.println("Accounts that have the tax applied: ");
+		for (int i = 0; i < accounts.size(); i++) {
+			if (accounts.get(i).getBalance() > 500000) {
+				accounts.get(i).setBalance(accounts.get(i).getBalance() + (accounts.get(i).getBalance() * 0.4));
+				System.out.println(accounts.get(i).toString());
+			}
+		}
+		for(BankAccount b: accounts) {
+			
+		}
+		
+		
+		
+	}
+
+}

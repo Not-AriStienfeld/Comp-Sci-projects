@@ -71,17 +71,17 @@ public class StringsAndWrapperClassesMain {
 			mean+= numbers[i];
 			
 		}
-		int mode = 0, counter3 = 0, i, j;
-		for (i = 0; i < numbers.length; ++i) {
+		int mode = 0, counter3 = 0, firstFor, secondFor;
+		for (firstFor = 0; firstFor < numbers.length; ++firstFor) {
 	         int count = 0;
-	         for (j = 0; j < numbers.length; ++j) {
-	            if (numbers[j] == numbers[i])
+	         for (secondFor = 0; secondFor < numbers.length; ++secondFor) {
+	            if (numbers[secondFor] == numbers[firstFor])
 	            ++count;
 	         }
 
 	         if (count > counter3) {
 	            counter3 = count;
-	            mode = (int) numbers[i];
+	            mode = (int) numbers[firstFor];
 	         }
 	      }
 		median = numbers[(int)counter/2];
@@ -89,7 +89,7 @@ public class StringsAndWrapperClassesMain {
 		System.out.println("The mean is:  " + mean);
 		System.out.println("The median is:  " + median);
 		System.out.println("The mode is:  " + mode );
-		//hi
+		//test
 		
 		
 		

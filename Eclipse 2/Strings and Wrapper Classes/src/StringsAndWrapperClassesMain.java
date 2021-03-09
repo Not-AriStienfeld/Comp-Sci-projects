@@ -63,8 +63,6 @@ public class StringsAndWrapperClassesMain {
 		int counter = 0;
 		double mean = 0;
 		double median = 0;
-		double min = numbers[0];
-		double max = numbers[0];
 		int modeCounter1 = 0;
 		int modecounter2 = 0;
 		Arrays.sort   (numbers);
@@ -73,11 +71,24 @@ public class StringsAndWrapperClassesMain {
 			mean+= numbers[i];
 			
 		}
+		int mode = 0, counter3 = 0, i, j;
+		for (i = 0; i < numbers.length; ++i) {
+	         int count = 0;
+	         for (j = 0; j < numbers.length; ++j) {
+	            if (numbers[j] == numbers[i])
+	            ++count;
+	         }
+
+	         if (count > counter3) {
+	            counter3 = count;
+	            mode = (int) numbers[i];
+	         }
+	      }
 		median = numbers[(int)counter/2];
 		mean = mean/counter;
 		System.out.println("The mean is:  " + mean);
 		System.out.println("The median is:  " + median);
-		System.out.println("The mode is:  " );
+		System.out.println("The mode is:  " + mode );
 		//hi
 		
 		

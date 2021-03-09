@@ -61,10 +61,8 @@ public class StringsAndWrapperClassesMain {
 			numbers[i] = (Double.parseDouble(numberArr[i]));
 		}
 		int counter = 0;
-		double mean = 0;
-		double median = 0;
-		int modeCounter1 = 0;
-		int modecounter2 = 0;
+		double mean = 0, median = 0;
+
 		Arrays.sort   (numbers);
 		for(int i = 0; i < numbers.length; i++) {
 			counter++;
@@ -89,8 +87,7 @@ public class StringsAndWrapperClassesMain {
 		System.out.println("The mean is:  " + mean);
 		System.out.println("The median is:  " + median);
 		System.out.println("The mode is:  " + mode );
-		//test
-		
+				
 		
 		
 		

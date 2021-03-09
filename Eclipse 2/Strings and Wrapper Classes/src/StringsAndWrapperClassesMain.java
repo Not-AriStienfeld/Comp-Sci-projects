@@ -63,7 +63,7 @@ public class StringsAndWrapperClassesMain {
 		int counter = 0;
 		double mean = 0, median = 0;
 
-		Arrays.sort   (numbers);
+		Arrays.sort(numbers);
 		for(int i = 0; i < numbers.length; i++) {
 			counter++;
 			mean+= numbers[i];

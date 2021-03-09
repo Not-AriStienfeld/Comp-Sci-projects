@@ -89,8 +89,7 @@ public class StringsAndWrapperClassesMain {
 		System.out.println("The mean is:  " + mean);
 		System.out.println("The median is:  " + median);
 		System.out.println("The mode is:  " + mode );
-		//test
-		
+				
 		
 		
 		

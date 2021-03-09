@@ -21,6 +21,7 @@ public class ConnectFourMain extends JFrame{
 	        window.pack();
 	        window.setLocationRelativeTo(null);
 	        window.setVisible(true);
+	        //hi
 		}
 
 }

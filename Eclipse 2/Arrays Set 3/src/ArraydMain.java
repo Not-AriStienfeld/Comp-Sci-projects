@@ -4,7 +4,7 @@ public class ArraydMain {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		
-		/*
+		
 		double[] wowThatsBig = new double[100];
 		
 		for (int i = 0; i < wowThatsBig.length; i++) {
@@ -25,9 +25,9 @@ public class ArraydMain {
 			}
 			
 		}
-		*/
 		
-		/* System.out.println(max1 + " should be equal to " + wowThatsBig[99]);
+		
+		 System.out.println(max1 + " should be equal to " + wowThatsBig[99]);
 		
 		String[] randomWords = {"bob","word", "yellow", "flow","bird" };
 		String together = "";
@@ -43,7 +43,7 @@ public class ArraydMain {
 		for (int i = 0; i < numbers.length; i++) {
 			System.out.println(numbers[i]); 
 		}
-		*/
+		
 		
 		int[] randomNumbers = new int[1000];
 		for (int i = 0; i< randomNumbers.length; i++) {

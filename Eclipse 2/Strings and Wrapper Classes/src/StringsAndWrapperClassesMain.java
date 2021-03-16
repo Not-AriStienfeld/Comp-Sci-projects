@@ -61,68 +61,38 @@ public class StringsAndWrapperClassesMain {
 		double[] numbers = new double[numberArr.length];
 
 		int counter = 0;
-		double mean = 0, median = 0;
-		ArrayList <Integer> numsArrList = new ArrayList<>();
-		ArrayList <Integer> counterList = new ArrayList<>();
-		ArrayList <Integer> modeList = new ArrayList<>();
-		boolean runRemove = false;
-		Arrays.sort(numbers);
-		for (int i = 0; i < numberArr.length; i++) {
-			numbers[i] = (Double.parseDouble(numberArr[i]));
-			numsArrList.add(Integer.parseInt(numberArr[i]));
-		}
+		double mean = 0;
+		double median = 0;
+		double min = numbers[0];
+		double max = numbers[0];
+		int modeCounter1 = 0;
+		int modecounter2 = 0;
+		Arrays.sort   (numbers);
 		for(int i = 0; i < numbers.length; i++) {
 			counter++;
 			mean+= numbers[i];
 
 		}
-		int mode = 0, counter3 = 0, firstFor, secondFor;
-		int count = 0;
-		for (int i = 0; i < numsArrList.size(); i++) {
-			runRemove = false;
-			mode = 0; counter3 = 0;
-			for (firstFor = 0; firstFor < numsArrList.size(); ++firstFor) {
-				count = 0;
-				for (secondFor = 0; secondFor < numsArrList.size(); ++secondFor) {
-					if (numsArrList.get(secondFor) == numsArrList.get(firstFor))
-						++count;
-				}
-
-				if (count > counter3) {
-					counter3 = count;
-					mode = (int) numsArrList.get(firstFor);
-				}
-			}
-			if (modeList.size() == 0) {
-				modeList.add(mode);
-				runRemove = true;
-				counterList.add(count);
-			} else if (count == counterList.get(0)) {
-				modeList.add(mode);
-				runRemove = true;
-				counterList.add(count);
-			}
-			if (runRemove){
-				for (int j = 0; j < numsArrList.size(); j++){
-					if (numsArrList.get(j) == mode) {
-						numsArrList.remove(j);
-					}
-				}
+		int mode = 0, counter3 = 0, i, j;
+		for (i = 0; i < numbers.length; ++i) {
+			int count = 0;
+			for (j = 0; j < numbers.length; ++j) {
+				if (numbers[j] == numbers[i])
+					++count;
 			}
 
-
-
-
+			if (count > counter3) {
+				counter3 = count;
+				mode = (int) numbers[i];
+			}
 		}
 		median = numbers[(int)counter/2];
 		mean = mean/counter;
 		System.out.println("The mean is:  " + mean);
 		System.out.println("The median is:  " + median);
-		System.out.print("The mode is:  ");
-		for (int i = 0; i < modeList.size(); i++) {
-			System.out.print(modeList.get(i) + " ");
-		}
-
+		System.out.println("The mode is:  " );
+		System.out.println("The mode is:  " + mode );
+		//hi
 
 
 

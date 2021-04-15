@@ -1,0 +1,21 @@
+Input:
+5s 8d 2c Qh Ks Ad 4h Jd
+
+Output:
+2c Ad 8d Jd 4h Qh 5s Ks
+
+=====
+
+Input:
+2d Jh 5d Ac 3s 7h 4c 6d As
+
+Output:
+Ac 4c 2d 5d 6d 7h Jh As 3s
+
+=====
+
+Input:
+5c 8d Kh 3h 8s Qc 4s 9h Ad
+
+Output:
+5c Qc Ad 8d 3h 9h Kh 4s 8s

@@ -1,0 +1,140 @@
+Input:
+4
+5
+S
+O
+X
+O
+F
+X
+O
+X
+O
+X
+X
+O
+X
+O
+X
+X
+O
+O
+O
+X
+
+Output:
+0 0
+0 1
+1 1
+2 1
+3 1
+3 2
+3 3
+2 3
+1 3
+0 3
+0 4
+
+=====
+
+Input:
+4
+5
+S
+X
+X
+X
+X
+O
+X
+X
+X
+X
+O
+X
+X
+X
+X
+O
+O
+O
+O
+F
+
+Output:
+0 0
+1 0
+2 0
+3 0
+3 1
+3 2
+3 3
+3 4
+
+=====
+
+Input:
+4
+5
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+S
+O
+O
+O
+F
+
+Output:
+3 0
+3 1
+3 2
+3 3
+3 4
+
+=====
+
+Input:
+4
+5
+X
+X
+X
+X
+X
+F
+O
+X
+X
+X
+X
+O
+X
+X
+X
+X
+O
+O
+O
+S
+
+Output:
+3 4
+3 3
+3 2
+3 1
+2 1
+1 1
+1 0

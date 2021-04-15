@@ -1,4 +1,4 @@
-//Project Name: Inherritancer project main
+//Project Name: Inheritance project main
 //Project Description: shows off every single method in the employeee, manager, and executive classes
 //Date: Apr 14, 2021
 //Written By: Ari Steinfeld

@@ -21,6 +21,14 @@ public class Manager extends Employeee {
 		return department;
 	}
 	
+	//override getPaid()
+	public String getPaid() {
+		return "Manager "+ getName() + " should get payed " + getSalary() + ".";
+	}
+	
+	
+	
+	
 	//setters
 	public void setDepartment(String department) {
 		this.department = department;
@@ -29,5 +37,9 @@ public class Manager extends Employeee {
 	//toString
 	public String toString() {
 		return ("My name is " + getName() + " and my salary is "  + getSalary() + ". My department is " + department + ".");
+	}
+	
+	public void raise() {
+		setSalary(getSalary()*1.1);
 	}
 }

@@ -25,6 +25,10 @@ public class Employeee {
 		return salary;
 	}
 	
+	public String getPaid() {
+		return name + " should get payed " + salary*40 + ".";
+	}
+	
 	//setters
 	public void setName(String name) {
 		this.name = name;
@@ -33,6 +37,8 @@ public class Employeee {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
+	
+	
 	
 	//toString 
 	public String toString() {

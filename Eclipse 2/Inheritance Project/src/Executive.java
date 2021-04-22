@@ -26,6 +26,11 @@ public class Executive extends Manager{
 		this.title = title;
 	}
 	
+	//overloading the raise method
+	public void raise(double ammount) {
+		setSalary(getSalary()* (ammount + 1));
+	}
+	
 	//toString
 	public String toString() {
 		return ("I am " + getName() + ", and my title is: " + title + "! My salary is " + getSalary() + ", which is far higher than yours. My department is " + getDepartment() + ".");

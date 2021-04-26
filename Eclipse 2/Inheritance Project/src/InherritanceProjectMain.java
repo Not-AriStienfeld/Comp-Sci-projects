@@ -2,6 +2,7 @@
 //Project Description: shows off every single method in the employeee, manager, and executive classes
 //Date: Apr 14, 2021
 //Written By: Ari Steinfeld
+import java.util.ArrayList;
 import java.util.Scanner;
 public class InherritanceProjectMain {
 
@@ -12,6 +13,17 @@ public class InherritanceProjectMain {
 		Manager ma = new Manager();
 		Executive ex = new Executive();
 		boolean condition = false;
+		ArrayList<Employeee> employees = new ArrayList<>();
+		employees.add(em);
+		employees.add(ma);
+		employees.add(ex);
+		for(Employeee e: employees) {
+			System.out.println(e);
+		}
+		for(Employeee e: employees){
+			
+		}
+		
 
 
 		System.out.println("Do you want to create employee with 'packed' or 'default' ");

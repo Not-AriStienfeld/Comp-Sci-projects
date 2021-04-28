@@ -1,0 +1,24 @@
+Input:
+4h 10c 2d 4s 10h
+6h 8c 4d 2s 8s
+
+Output:
+Jack 8
+
+=====
+
+Input:
+4c 10c 7h 8s 3s
+5s Qc 4h Jc Ah
+
+Output:
+Jack 28
+
+=====
+
+Input:
+9c 10d 10h 6s 3c
+7c 8h 6c Jd As
+
+Output:
+Tie 2

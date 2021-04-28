@@ -23,35 +23,35 @@ public class SortingPanel extends JPanel{
 	// Constants used for the project. 
 	private static final int WIDTH = 1200;					// The width of the panel
 	private static final int HEIGHT = 700;					// The height of the panel
-	
-	private static final String FILE_NAME = "numbers5.txt"; // This String is used by the createArray() function to get 
-															// integers from a text file. You can change this value to 
-															// a different file name if you want to read from a file
-															// that has more or less numbers.
-	
+
+	private static final String FILE_NAME = "50numbers.txt"; // This String is used by the createArray() function to get 
+	// integers from a text file. You can change this value to 
+	// a different file name if you want to read from a file
+	// that has more or less numbers.
+
 	// Variables used for the sorting process.
 	private int[] numbers;									// The array of numbers. This array will be initialized and
-															// filled with numbers in the function createArray().
-	
+	// filled with numbers in the function createArray().
+
 	private boolean start;									// start and finish are booleans that are used to start the
 	private boolean finish;									// sorting process and to draw the the total number of comparisons
-															// once all sorting algorithms have finished.
-	
+	// once all sorting algorithms have finished.
+
 	// Variables used to display info on the panel.
 	private int comparisons;								// comparisons should keep track of how many comparisons the current
-															// sorting algorithm has made.
-	
+	// sorting algorithm has made.
+
 	private int compareIndex1;								// compareIndex1 and compareIndex2 are used to highlight which two
 	private int compareIndex2;								// numbers are bring compared. You must update these variables
-															// every time a comparison is made.
-	
-	private String sortingName;								// used to display the current sorting algorithm's name.
-	
-	private int bubbleComparisons;							// This variable will be used to keep track of how many comparisons
-															// bubble sort required. You'll need to add similar variables for
-															// sorting algorithm that you write.
+	// every time a comparison is made.
 
-	
+	private String sortingName;								// used to display the current sorting algorithm's name.
+
+	private int bubbleComparisons;							// This variable will be used to keep track of how many comparisons
+	// bubble sort required. You'll need to add similar variables for
+	// sorting algorithm that you write.
+
+
 	// Sorting Panel Constructor
 	public SortingPanel(){
 		sortingName = "";
@@ -69,7 +69,7 @@ public class SortingPanel extends JPanel{
 		createArray();
 	}
 
-	
+
 	// method: swap
 	// description: This method will swap two elements in array numbers and then repaint the panel.
 	//              Your code should call this method whenever you want to swapt two elements.
@@ -86,20 +86,26 @@ public class SortingPanel extends JPanel{
 	//              array it will set the two instance fields compareIndex1 and compareIndex2 to the indexes of the two
 	//              elements that are bring compared. These variables are used to draw the red 
 	private void bubbleSort(){
-		
-		for (int j=0; j<(numbers.length-1); j++) {
-			for (int i=0; i<(numbers.length-1); i++) {
-				comparisons++;								// update the comparisons counter. 
-				compareIndex1 = i;							// update the two compare indexes so that the numbers that
-				compareIndex2 = i+1;						// are currently being compared are highlighted.
-				this.paintImmediately(getVisibleRect());	// repaint the panel. Your code should repaint the panel after each
-															// comparison and swap.
-				
-				if (numbers[i] > numbers[i+1]) {
-					swap(i, i+1);							// exchange elements
+		boolean swapped = false;
+		do {
+			
+			for (int j=0; j<(numbers.length-1); j++) {
+				for (int i=0; i<(numbers.length-1)-j; i++) {
+					swapped = false;
+					comparisons++;								// update the comparisons counter. 
+					compareIndex1 = i;							// update the two compare indexes so that the numbers that
+					compareIndex2 = i+1;						// are currently being compared are highlighted.
+					this.paintImmediately(getVisibleRect());	// repaint the panel. Your code should repaint the panel after each
+					// comparison and swap.
+
+					if (numbers[i] > numbers[i+1]) {
+						swap(i, i+1);
+						swapped = true;
+						// exchange elements
+					}
 				}
 			}
-		}
+		}while(swapped);
 	}
 
 	// method: resizeArray
@@ -161,13 +167,13 @@ public class SortingPanel extends JPanel{
 	// parameters: Graphics g - This object is used for drawing on JPanels.
 	public void paintComponent(Graphics g){
 		Graphics2D g2 = (Graphics2D) g;
-		
+
 		// finish is initially false. It is set to true once all sorting algorithms have completed.
 		// Once all of the sorting algorithms have completed your code should display the total
 		// number of comparisons each sorting algorithm required.
 		g2.setColor(Color.WHITE);
 		g2.fillRect(0, 0, WIDTH, HEIGHT);
-		
+
 		if(!finish){
 			// code that draws the rectangles during the sorting process
 			for(int i=0; i<numbers.length; i++){							// iterate through the array
@@ -175,7 +181,7 @@ public class SortingPanel extends JPanel{
 					g2.setColor(Color.RED);									// of the two numbers that are currently being compared.
 				else
 					g2.setColor(Color.CYAN);								// otherwise set it to Cyan. You can off course change this.
-				
+
 				// Draw a rectangle for the current number. Height is based on the number's value.
 				g2.fillRect(i*WIDTH/numbers.length, HEIGHT-numbers[i], WIDTH/numbers.length, numbers[i]);
 
@@ -193,7 +199,7 @@ public class SortingPanel extends JPanel{
 		else{
 			// this code will run once all sorting algorithms have finished
 			for(int i=0; i<numbers.length; i++){							// iterate through the array
-				
+
 				// Draw a rectangle for the current number. Height is based on the number's value.
 				g2.setColor(Color.CYAN);									
 				g2.fillRect(i*WIDTH/numbers.length, HEIGHT-numbers[i], WIDTH/numbers.length, numbers[i]);
@@ -210,21 +216,21 @@ public class SortingPanel extends JPanel{
 			g2.drawString("Bubble Sort", WIDTH/2-227, HEIGHT/2-100);
 			g2.drawString("Comparisons = " + String.valueOf(bubbleComparisons), WIDTH/2-20, HEIGHT/2-100);
 		}
-		
+
 		if(!start){
 			start =!start;
-			
+
 			// These next four lines of code contain everything that is necessary to call the bubble sort process.
 			// You'll follow the same process for each of the other sorting algorithms that you write.
 			createArray();						// create an array of unsorted integers from the text file.
 			sortingName = "Bubble Sort";		// change sortingName variable to "Bubble Sort" so that the panel
-												// will say bubble sort while this sorting algorithm is running.
+			// will say bubble sort while this sorting algorithm is running.
 			bubbleSort();						// start the bubble sort process.
 			bubbleComparisons = comparisons;    // store the number of comparisons that bubble sort required.
-			
+
 			// Insert calls to your other sorting algorithms. Remember to recreate your array before sorting.
-			
-			
+
+
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());
 		}

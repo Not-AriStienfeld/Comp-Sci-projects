@@ -231,7 +231,7 @@ public class SortingPanel extends JPanel{
 			// by adding counts for each of the sorting algorithms that you implement.
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font ("Arial", Font.BOLD, 35));
-			g2.drawString("Bubble Sort", WIDTH/2-227, HEIGHT/2-100);
+			g2.drawString("Selection Sort", WIDTH/2-227, HEIGHT/2-100);
 			g2.drawString("Comparisons = " + String.valueOf(bubbleComparisons), WIDTH/2-20, HEIGHT/2-100);
 		}
 

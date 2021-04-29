@@ -120,7 +120,7 @@ public class SortingPanel extends JPanel{
 				selecCompar++;
 			}
 			if(iMin != j) {
-				swap(numbers[j], numbers[iMin]);
+				swap(j, iMin);
 			}
 		}
 		

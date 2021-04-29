@@ -38,7 +38,8 @@ public class SortingPanel extends JPanel{
 	// once all sorting algorithms have finished.
 
 	// Variables used to display info on the panel.
-	private int comparisons;								// comparisons should keep track of how many comparisons the current
+	private int comparisons;	// comparisons should keep track of how many comparisons the current
+	private int selecCompar;
 	// sorting algorithm has made.
 
 	private int compareIndex1;								// compareIndex1 and compareIndex2 are used to highlight which two
@@ -106,6 +107,23 @@ public class SortingPanel extends JPanel{
 				}
 			}
 		}while(swapped);
+	}
+	
+	private void selectionSort() {
+		int iMin;
+		for(int j = 0; j <numbers.length -1; j++) {
+			iMin = j;
+			for(int i = j+1; i < numbers.length; i++) {
+				if(numbers[i] < numbers[iMin]) {
+					iMin = i;
+				}
+				selecCompar++;
+			}
+			if(iMin != j) {
+				swap(numbers[j], numbers[iMin]);
+			}
+		}
+		
 	}
 
 	// method: resizeArray
@@ -223,10 +241,10 @@ public class SortingPanel extends JPanel{
 			// These next four lines of code contain everything that is necessary to call the bubble sort process.
 			// You'll follow the same process for each of the other sorting algorithms that you write.
 			createArray();						// create an array of unsorted integers from the text file.
-			sortingName = "Bubble Sort";		// change sortingName variable to "Bubble Sort" so that the panel
+			sortingName = "selecSort";		// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-			bubbleSort();						// start the bubble sort process.
-			bubbleComparisons = comparisons;    // store the number of comparisons that bubble sort required.
+			selectionSort();						// start the bubble sort process.
+			bubbleComparisons = selecCompar;    // store the number of comparisons that bubble sort required.
 
 			// Insert calls to your other sorting algorithms. Remember to recreate your array before sorting.
 

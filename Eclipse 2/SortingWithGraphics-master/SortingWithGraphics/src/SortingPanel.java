@@ -295,12 +295,7 @@ public class SortingPanel extends JPanel{
 			// You'll follow the same process for each of the other sorting algorithms that you write.
 					// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-			createArray();						
-			sortingName = "bubble sort";
-			bubbleSort();						
-			bubbleComparisons = comparisons;   
-
-
+			
 			
 			createArray();
 			sortingName = "selecSort";
@@ -312,7 +307,13 @@ public class SortingPanel extends JPanel{
 			sortingName = "quicksort";
 			quickSort(getNumbers(), 0, getNumbers().length -1);
 			quickCompare = comparisons;
-					
+			
+			createArray();						
+			sortingName = "bubble sort";
+			bubbleSort();						
+			bubbleComparisons = comparisons;   
+			
+	
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());
 		}

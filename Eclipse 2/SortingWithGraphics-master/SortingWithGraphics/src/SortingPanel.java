@@ -39,7 +39,7 @@ public class SortingPanel extends JPanel{
 
 	// Variables used to display info on the panel.
 	private int comparisons;	// comparisons should keep track of how many comparisons the current
-	private int selecCompar;
+	private int quickCompare;
 	// sorting algorithm has made.
 
 	private int compareIndex1;								// compareIndex1 and compareIndex2 are used to highlight which two
@@ -48,7 +48,8 @@ public class SortingPanel extends JPanel{
 
 	private String sortingName;								// used to display the current sorting algorithm's name.
 
-	private int bubbleComparisons;							// This variable will be used to keep track of how many comparisons
+	private int bubbleComparisons;	
+	private int selectionComparisons;// This variable will be used to keep track of how many comparisons
 	// bubble sort required. You'll need to add similar variables for
 	// sorting algorithm that you write.
 
@@ -89,7 +90,7 @@ public class SortingPanel extends JPanel{
 	private void bubbleSort(){
 		boolean swapped = false;
 		do {
-			
+
 			for (int j=0; j<(numbers.length-1); j++) {
 				for (int i=0; i<(numbers.length-1)-j; i++) {
 					swapped = false;
@@ -108,7 +109,7 @@ public class SortingPanel extends JPanel{
 			}
 		}while(swapped);
 	}
-	
+
 	private void selectionSort() {
 		int iMin;
 		for(int j = 0; j <numbers.length -1; j++) {
@@ -116,15 +117,63 @@ public class SortingPanel extends JPanel{
 			for(int i = j+1; i < numbers.length; i++) {
 				if(numbers[i] < numbers[iMin]) {
 					iMin = i;
+					this.paintImmediately(getVisibleRect());	// repaint the panel. Your code should repaint the panel after each
+
 				}
-				selecCompar++;
+
+				comparisons++;
+				compareIndex1 = iMin;
+				compareIndex2 = j;
 			}
 			if(iMin != j) {
 				swap(j, iMin);
 			}
 		}
-		
+
 	}
+	public int[] getNumbers() {
+		return numbers;
+	}
+	public void quickSort(int arr[], int begin, int end) {
+	    if (begin < end) {
+	    	comparisons++;
+	    	compareIndex1 = begin;
+    		compareIndex2 = end;
+    		this.paintImmediately(getVisibleRect());
+	        int partitionIndex = partition(arr, begin, end);
+
+	        quickSort(arr, begin, partitionIndex-1);
+	        quickSort(arr, partitionIndex+1, end);
+	    }
+	}
+	private int partition(int arr[], int begin, int end) {
+	    int pivot = arr[end];
+	    int i = (begin-1);
+
+	    for (int j = begin; j < end; j++) {
+	        if (arr[j] <= pivot) {
+	            i++;
+	            comparisons++;
+	    	    compareIndex1 = arr[i+1];
+	    		compareIndex2 = arr[end];
+	    		this.paintImmediately(getVisibleRect());
+	            int swapTemp = arr[i];
+	            arr[i] = arr[j];
+	            arr[j] = swapTemp;
+	            
+	        }
+	    }
+	    comparisons++;
+	    compareIndex1 = arr[i+1];
+		compareIndex2 = arr[end];
+		this.paintImmediately(getVisibleRect());
+	    int swapTemp = arr[i+1];
+	    arr[i+1] = arr[end];
+	    arr[end] = swapTemp;
+
+	    return i+1;
+	}
+	
 
 	// method: resizeArray
 	// description: This function is used by the createArray. It resizes the array as the numbers are read in from the
@@ -231,8 +280,12 @@ public class SortingPanel extends JPanel{
 			// by adding counts for each of the sorting algorithms that you implement.
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font ("Arial", Font.BOLD, 35));
-			g2.drawString("Selection", WIDTH/2-227, HEIGHT/2-100);
+			g2.drawString("Bubble Sort", WIDTH/2-227, HEIGHT/2-100);
 			g2.drawString("Comparisons = " + String.valueOf(bubbleComparisons), WIDTH/2-20, HEIGHT/2-100);
+			g2.drawString("Selection Sort", WIDTH/2-263, HEIGHT/2);
+			g2.drawString("Comparisons = " + String.valueOf(selectionComparisons), WIDTH/2-20, HEIGHT/2);
+			g2.drawString("Quick Sort", WIDTH/2-225, HEIGHT/2+100);
+			g2.drawString("Comparisons = " + String.valueOf(quickCompare), WIDTH/2-20, HEIGHT/2+100);
 		}
 
 		if(!start){
@@ -240,15 +293,26 @@ public class SortingPanel extends JPanel{
 
 			// These next four lines of code contain everything that is necessary to call the bubble sort process.
 			// You'll follow the same process for each of the other sorting algorithms that you write.
-			createArray();						// create an array of unsorted integers from the text file.
-			sortingName = "selecSort";		// change sortingName variable to "Bubble Sort" so that the panel
+					// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-			selectionSort();						// start the bubble sort process.
-			bubbleComparisons = selecCompar;    // store the number of comparisons that bubble sort required.
+			createArray();						
+			sortingName = "bubble sort";
+			bubbleSort();						
+			bubbleComparisons = comparisons;   
 
-			// Insert calls to your other sorting algorithms. Remember to recreate your array before sorting.
 
-
+			
+			createArray();
+			sortingName = "selecSort";
+			selectionSort();
+			selectionComparisons = comparisons;
+			
+			
+			createArray();
+			sortingName = "quicksort";
+			quickSort(getNumbers(), 0, getNumbers().length -1);
+			quickCompare = comparisons;
+					
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());
 		}

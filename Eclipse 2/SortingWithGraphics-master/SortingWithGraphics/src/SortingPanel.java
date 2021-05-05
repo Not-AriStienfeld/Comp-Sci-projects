@@ -147,7 +147,7 @@ public class SortingPanel extends JPanel{
 	        quickSort(newArray, partitionIndex+1, end);
 	    }
 	}
-	private int partition(int newArray[], int begin, int end) {
+	public int partition(int newArray[], int begin, int end) {
 	    int pivotPoint = newArray[end];
 	    int i = (begin-1);
 

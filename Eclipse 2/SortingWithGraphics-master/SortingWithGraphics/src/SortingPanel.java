@@ -1,7 +1,7 @@
 // Project: Sorting With Graphics.
 // Written by: Mr. Swope
 // Date: 3/16/20
-// Description: This project illustrates the sorting of numbers from a text file using several sorting algorithms. Each number in the array is drawn
+// Description: This project illustrates the sorting of numbers from a text file using several sorting algorithms. Each number in the Array is drawn
 //              as a rectangle on the panel, were the height of the rectangle represents the size of the number - the bigger the number, the taller
 //              the rectangle. There will also be two red rectangles drawn on the panel that will illustrate which two rectangles are currently being 
 //              compared.
@@ -24,13 +24,13 @@ public class SortingPanel extends JPanel{
 	private static final int WIDTH = 1200;					// The width of the panel
 	private static final int HEIGHT = 700;					// The height of the panel
 
-	private static final String FILE_NAME = "50numbers.txt"; // This String is used by the createArray() function to get 
+	private static final String FILE_NAME = "numbers5.txt"; // This String is used by the createArray() function to get 
 	// integers from a text file. You can change this value to 
 	// a different file name if you want to read from a file
 	// that has more or less numbers.
 
 	// Variables used for the sorting process.
-	private int[] numbers;									// The array of numbers. This array will be initialized and
+	private int[] numbers;									// The Array of numbers. This Array will be initialized and
 	// filled with numbers in the function createArray().
 
 	private boolean start;									// start and finish are booleans that are used to start the
@@ -49,7 +49,8 @@ public class SortingPanel extends JPanel{
 	private String sortingName;								// used to display the current sorting algorithm's name.
 
 	private int bubbleComparisons;	
-	private int selectionComparisons;// This variable will be used to keep track of how many comparisons
+	private int selectionComparisons;
+	private int insertCompare;// This variable will be used to keep track of how many comparisons
 	// bubble sort required. You'll need to add similar variables for
 	// sorting algorithm that you write.
 
@@ -73,7 +74,7 @@ public class SortingPanel extends JPanel{
 
 
 	// method: swap
-	// description: This method will swap two elements in array numbers and then repaint the panel.
+	// description: This method will swap two elements in Array numbers and then repaint the panel.
 	//              Your code should call this method whenever you want to swapt two elements.
 	// parameters: int i and int j - the two indexes that of the elements that will be swapped.
 	private void swap(int i, int j){
@@ -84,8 +85,8 @@ public class SortingPanel extends JPanel{
 	}
 
 	// method: BubbleSort
-	// description: This method will sort the integers in array numbers using the bubble sort algorithm. As it sorts the 
-	//              array it will set the two instance fields compareIndex1 and compareIndex2 to the indexes of the two
+	// description: This method will sort the integers in Array numbers using the bubble sort algorithm. As it sorts the 
+	//              Array it will set the two instance fields compareIndex1 and compareIndex2 to the indexes of the two
 	//              elements that are bring compared. These variables are used to draw the red 
 	private void bubbleSort(){
 		boolean swapped = false;
@@ -134,52 +135,70 @@ public class SortingPanel extends JPanel{
 	public int[] getNumbers() {
 		return numbers;
 	}
-	public void quickSort(int arr[], int begin, int end) {
+	public void quickSort(int newArray[], int begin, int end) {
 	    if (begin < end) {
 	    	comparisons++;
 	    	compareIndex1 = begin;
     		compareIndex2 = end;
     		this.paintImmediately(getVisibleRect());
-	        int partitionIndex = partition(arr, begin, end);
+	        int partitionIndex = partition(newArray, begin, end);
 
-	        quickSort(arr, begin, partitionIndex-1);
-	        quickSort(arr, partitionIndex+1, end);
+	        quickSort(newArray, begin, partitionIndex-1);
+	        quickSort(newArray, partitionIndex+1, end);
 	    }
 	}
-	private int partition(int arr[], int begin, int end) {
-	    int pivot = arr[end];
+	private int partition(int newArray[], int begin, int end) {
+	    int pivotPoint = newArray[end];
 	    int i = (begin-1);
 
 	    for (int j = begin; j < end; j++) {
-	        if (arr[j] <= pivot) {
+	        if (newArray[j] <= pivotPoint) {
 	            i++;
 	            comparisons++;
-	    	    compareIndex1 = arr[i+1];
-	    		compareIndex2 = arr[end];
+	    	    compareIndex1 = newArray[i+1];
+	    		compareIndex2 = newArray[end];
 	    		this.paintImmediately(getVisibleRect());
-	            int swapTemp = arr[i];
-	            arr[i] = arr[j];
-	            arr[j] = swapTemp;
+	            int forSwapping = newArray[i];
+	            newArray[i] = newArray[j];
+	            newArray[j] = forSwapping;
 	            
 	        }
 	    }
 	    comparisons++;
-	    compareIndex1 = arr[i+1];
-		compareIndex2 = arr[end];
+	    compareIndex1 = newArray[i+1];
+		compareIndex2 = newArray[end];
 		this.paintImmediately(getVisibleRect());
-	    int swapTemp = arr[i+1];
-	    arr[i+1] = arr[end];
-	    arr[end] = swapTemp;
+	    int swapTemp = newArray[i+1];
+	    newArray[i+1] = newArray[end];
+	    newArray[end] = swapTemp;
 
 	    return i+1;
 	}
 	
+	private void insertionSort() {
+		compareIndex1 = 0;
+		compareIndex2 = 0;
+		for(int i = 1; i < numbers.length; i++) {
+			compareIndex1 = numbers[i];
+			compareIndex2 = i;
+			while (compareIndex2 > 0 && numbers[compareIndex2 - 1] > compareIndex1) {
+				comparisons++;
+				swap(compareIndex2, compareIndex2 -1);
+				compareIndex2--;
+			}
+			numbers[compareIndex2] = compareIndex1;
+			
+			
+		}
+		
+	}
+	
 
 	// method: resizeArray
-	// description: This function is used by the createArray. It resizes the array as the numbers are read in from the
-	//              text file by either doubling the size if more space is needed or shrinking the size of the array
+	// description: This function is used by the createArray. It resizes the Array as the numbers are read in from the
+	//              text file by either doubling the size if more space is needed or shrinking the size of the Array
 	//              after all numbers have been added. You shouldn't modify or call this function.
-	// parameters: int newSize - the size for the array.
+	// parameters: int newSize - the size for the Array.
 	private void resizeArray(int newSize){
 		int newArray[] = new int[newSize];
 		if(numbers.length <= newSize){
@@ -196,7 +215,7 @@ public class SortingPanel extends JPanel{
 	} 
 
 	// method: createArray
-	// description: This function will add all of the numbers from the text file FILE_NAME into the array numbers.
+	// description: This function will add all of the numbers from the text file FILE_NAME into the Array numbers.
 	//              It should be called before each sorting algorithm begins.
 	void createArray() {
 		comparisons = 0;
@@ -220,7 +239,7 @@ public class SortingPanel extends JPanel{
 	}
 
 	// method: toString 
-	// description: Prints the contents of the numbers array. You could use this function if you need to debug your code.
+	// description: Prints the contents of the numbers Array. You could use this function if you need to debug your code.
 	public String toString(){
 		String s = new String();
 		for(int i = 0; i<numbers.length; i++)
@@ -243,7 +262,7 @@ public class SortingPanel extends JPanel{
 
 		if(!finish){
 			// code that draws the rectangles during the sorting process
-			for(int i=0; i<numbers.length; i++){							// iterate through the array
+			for(int i=0; i<numbers.length; i++){							// iterate through the Array
 				if(compareIndex1 == i || compareIndex2 == i)				// set the color to red if current element is one
 					g2.setColor(Color.RED);									// of the two numbers that are currently being compared.
 				else
@@ -265,7 +284,7 @@ public class SortingPanel extends JPanel{
 		}
 		else{
 			// this code will run once all sorting algorithms have finished
-			for(int i=0; i<numbers.length; i++){							// iterate through the array
+			for(int i=0; i<numbers.length; i++){							// iterate through the Array
 
 				// Draw a rectangle for the current number. Height is based on the number's value.
 				g2.setColor(Color.CYAN);									
@@ -286,6 +305,8 @@ public class SortingPanel extends JPanel{
 			g2.drawString("Comparisons = " + String.valueOf(selectionComparisons), WIDTH/2-20, HEIGHT/2);
 			g2.drawString("Quick Sort", WIDTH/2-225, HEIGHT/2+100);
 			g2.drawString("Comparisons = " + String.valueOf(quickCompare), WIDTH/2-20, HEIGHT/2+100);
+			g2.drawString("Insertion Sort", WIDTH/2-263, HEIGHT/2-200);
+			g2.drawString("Comparisons = " + String.valueOf(insertCompare), WIDTH/2-20, HEIGHT/2-200);
 		}
 
 		if(!start){
@@ -308,11 +329,17 @@ public class SortingPanel extends JPanel{
 			quickSort(getNumbers(), 0, getNumbers().length -1);
 			quickCompare = comparisons;
 			
+			createArray();
+			sortingName = "insertion sort";
+			insertionSort();
+			insertCompare = comparisons;
+			
+			/*
 			createArray();						
 			sortingName = "bubble sort";
 			bubbleSort();						
 			bubbleComparisons = comparisons;   
-			
+			*/
 	
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());

@@ -9,6 +9,7 @@
 //				You will update this code by improving bubble sort and implementing selection sort, insertion sort and two other sorting algorithms of
 //              your choice. Sorting algorithms like bogosort
 import java.awt.Color;
+import java.util.concurrent.TimeUnit;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -111,6 +112,25 @@ public class SortingPanel extends JPanel{
 		}while(swapped);
 	}
 
+	private void stalinSort(){
+		for(int i = 0; i < numbers.length-1; i++) {
+			comparisons++;
+			compareIndex1 = i;
+			compareIndex2 = i-1;
+			this.paintImmediately(getVisibleRect());
+			/*
+			try {
+				TimeUnit.SECONDS.sleep(1/numbers.length);
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
+			}
+			*/
+			numbers[i]=1;
+			
+			
+		}
+	}
+
 	private void selectionSort() {
 		int iMin;
 		for(int j = 0; j <numbers.length -1; j++) {
@@ -138,51 +158,51 @@ public class SortingPanel extends JPanel{
 	public void quickSort(int newArray[], int begin, int end) {
 		if (begin < end) {
 			comparisons++;
-	    	compareIndex1 = begin;
+			compareIndex1 = begin;
 			compareIndex2 = end;
-    		this.paintImmediately(getVisibleRect());
-	        int partitionIndex = partition(newArray, begin, end);
+			this.paintImmediately(getVisibleRect());
+			int partitionIndex = partition(newArray, begin, end);
 
-	        quickSort(newArray, begin, partitionIndex-1);
-	        quickSort(newArray, partitionIndex+1, end);
-	    }else {
-	    	comparisons++;
-	    	compareIndex1 = begin;
+			quickSort(newArray, begin, partitionIndex-1);
+			quickSort(newArray, partitionIndex+1, end);
+		}else {
+			comparisons++;
+			compareIndex1 = begin;
 			compareIndex2 = end;
-	    }
+		}
 	}
 	public int partition(int newArray[], int begin, int end) {
-	    int pivotPoint = newArray[end];
-	    int i = (begin-1);
+		int pivotPoint = newArray[end];
+		int i = (begin-1);
 
-	    for (int j = begin; j < end; j++) {
-	        if (newArray[j] <= pivotPoint) {
-	            i++;
-	            comparisons++;
-	    	    compareIndex1 = newArray[i+1];
-	    		compareIndex2 = newArray[end];
-	    		this.paintImmediately(getVisibleRect());
-	            int forSwapping = newArray[i];
-	            newArray[i] = newArray[j];
-	            newArray[j] = forSwapping;
-	            
-	        }else {
-	        	comparisons++;
-	    	    compareIndex1 = newArray[i+1];
-	    		compareIndex2 = newArray[end];
-	        }
-	    }
-	    comparisons++;
-	    compareIndex1 = newArray[i+1];
+		for (int j = begin; j < end; j++) {
+			if (newArray[j] <= pivotPoint) {
+				i++;
+				comparisons++;
+				compareIndex1 = newArray[i+1];
+				compareIndex2 = newArray[end];
+				this.paintImmediately(getVisibleRect());
+				int forSwapping = newArray[i];
+				newArray[i] = newArray[j];
+				newArray[j] = forSwapping;
+
+			}else {
+				comparisons++;
+				compareIndex1 = newArray[i+1];
+				compareIndex2 = newArray[end];
+			}
+		}
+		comparisons++;
+		compareIndex1 = newArray[i+1];
 		compareIndex2 = newArray[end];
 		this.paintImmediately(getVisibleRect());
-	    int swapTemp = newArray[i+1];
-	    newArray[i+1] = newArray[end];
-	    newArray[end] = swapTemp;
+		int swapTemp = newArray[i+1];
+		newArray[i+1] = newArray[end];
+		newArray[end] = swapTemp;
 
-	    return i+1;
+		return i+1;
 	}
-	
+
 	private void insertionSort() {
 		compareIndex1 = 0;
 		compareIndex2 = 0;
@@ -195,12 +215,12 @@ public class SortingPanel extends JPanel{
 				compareIndex2--;
 			}
 			numbers[compareIndex2] = compareIndex1;
-			
-			
+
+
 		}
-		
+
 	}
-	
+
 
 	// method: resizeArray
 	// description: This function is used by the createArray. It resizes the Array as the numbers are read in from the
@@ -322,16 +342,19 @@ public class SortingPanel extends JPanel{
 
 			// These next four lines of code contain everything that is necessary to call the bubble sort process.
 			// You'll follow the same process for each of the other sorting algorithms that you write.
-					// change sortingName variable to "Bubble Sort" so that the panel
+			// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-			
+
+			createArray();
+			sortingName = "stalinSort";
+			stalinSort();
 			
 			createArray();
 			sortingName = "selecSort";
 			selectionSort();
 			selectionComparisons = comparisons;
-			
-			
+
+
 			createArray();
 			sortingName = "quicksort";
 			quickSort(getNumbers(), 0, getNumbers().length -1);
@@ -341,14 +364,14 @@ public class SortingPanel extends JPanel{
 			sortingName = "insertion sort";
 			insertionSort();
 			insertCompare = comparisons;
-			*/
+			 */
 			/*
 			createArray();						
 			sortingName = "bubble sort";
 			bubbleSort();						
 			bubbleComparisons = comparisons;   
-			*/
-	
+			 */
+
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());
 		}

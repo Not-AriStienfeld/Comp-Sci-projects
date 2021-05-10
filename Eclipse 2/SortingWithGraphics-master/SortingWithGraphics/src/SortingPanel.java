@@ -112,7 +112,7 @@ public class SortingPanel extends JPanel{
 		}while(swapped);
 	}
 
-	private void stalinSort(){
+	private void brutalSort(){
 		for(int i = 0; i < numbers.length; i++) {
 			
 			compareIndex1 = i;
@@ -351,8 +351,8 @@ public class SortingPanel extends JPanel{
 			quickCompare = comparisons;
 */
 			createArray();
-			sortingName = "stalinSort";
-			stalinSort();
+			sortingName = "brutalSort";
+			brutalSort();
 			/*
 			createArray();
 			sortingName = "selecSort";

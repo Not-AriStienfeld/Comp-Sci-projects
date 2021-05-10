@@ -113,7 +113,7 @@ public class SortingPanel extends JPanel{
 	}
 
 	private void stalinSort(){
-		for(int i = 0; i < numbers.length-1; i++) {
+		for(int i = 0; i < numbers.length; i++) {
 			
 			compareIndex1 = i;
 			compareIndex2 = i-1;
@@ -344,12 +344,12 @@ public class SortingPanel extends JPanel{
 			// You'll follow the same process for each of the other sorting algorithms that you write.
 			// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-
+/*
 			createArray();
 			sortingName = "quicksort";
 			quickSort(getNumbers(), 0, getNumbers().length -1);
 			quickCompare = comparisons;
-
+*/
 			createArray();
 			sortingName = "stalinSort";
 			stalinSort();

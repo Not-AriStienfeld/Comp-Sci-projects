@@ -114,7 +114,7 @@ public class SortingPanel extends JPanel{
 
 	private void stalinSort(){
 		for(int i = 0; i < numbers.length-1; i++) {
-			comparisons++;
+			
 			compareIndex1 = i;
 			compareIndex2 = i-1;
 			this.paintImmediately(getVisibleRect());
@@ -346,20 +346,20 @@ public class SortingPanel extends JPanel{
 			// will say bubble sort while this sorting algorithm is running.
 
 			createArray();
+			sortingName = "quicksort";
+			quickSort(getNumbers(), 0, getNumbers().length -1);
+			quickCompare = comparisons;
+
+			createArray();
 			sortingName = "stalinSort";
 			stalinSort();
-			
+			/*
 			createArray();
 			sortingName = "selecSort";
 			selectionSort();
 			selectionComparisons = comparisons;
-
-
-			createArray();
-			sortingName = "quicksort";
-			quickSort(getNumbers(), 0, getNumbers().length -1);
-			quickCompare = comparisons;
-			/*
+			
+			
 			createArray();
 			sortingName = "insertion sort";
 			insertionSort();

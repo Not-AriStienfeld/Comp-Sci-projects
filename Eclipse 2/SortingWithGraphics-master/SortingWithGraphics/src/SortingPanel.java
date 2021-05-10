@@ -136,15 +136,19 @@ public class SortingPanel extends JPanel{
 		return numbers;
 	}
 	public void quickSort(int newArray[], int begin, int end) {
-	    if (begin < end) {
-	    	comparisons++;
+		if (begin < end) {
+			comparisons++;
 	    	compareIndex1 = begin;
-    		compareIndex2 = end;
+			compareIndex2 = end;
     		this.paintImmediately(getVisibleRect());
 	        int partitionIndex = partition(newArray, begin, end);
 
 	        quickSort(newArray, begin, partitionIndex-1);
 	        quickSort(newArray, partitionIndex+1, end);
+	    }else {
+	    	comparisons++;
+	    	compareIndex1 = begin;
+			compareIndex2 = end;
 	    }
 	}
 	public int partition(int newArray[], int begin, int end) {
@@ -162,6 +166,10 @@ public class SortingPanel extends JPanel{
 	            newArray[i] = newArray[j];
 	            newArray[j] = forSwapping;
 	            
+	        }else {
+	        	comparisons++;
+	    	    compareIndex1 = newArray[i+1];
+	    		compareIndex2 = newArray[end];
 	        }
 	    }
 	    comparisons++;
@@ -328,12 +336,12 @@ public class SortingPanel extends JPanel{
 			sortingName = "quicksort";
 			quickSort(getNumbers(), 0, getNumbers().length -1);
 			quickCompare = comparisons;
-			
+			/*
 			createArray();
 			sortingName = "insertion sort";
 			insertionSort();
 			insertCompare = comparisons;
-			
+			*/
 			/*
 			createArray();						
 			sortingName = "bubble sort";

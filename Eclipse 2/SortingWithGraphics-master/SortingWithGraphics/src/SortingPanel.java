@@ -335,6 +335,8 @@ public class SortingPanel extends JPanel{
 			g2.drawString("Comparisons = " + String.valueOf(quickCompare), WIDTH/2-20, HEIGHT/2+100);
 			g2.drawString("Insertion Sort", WIDTH/2-263, HEIGHT/2-200);
 			g2.drawString("Comparisons = " + String.valueOf(insertCompare), WIDTH/2-20, HEIGHT/2-200);
+			g2.drawString("Brutal Sort", WIDTH/2-225, HEIGHT/2+200);
+			g2.drawString("Comparisons = " + String.valueOf(0), WIDTH/2-20, HEIGHT/2+200);
 		}
 
 		if(!start){
@@ -344,16 +346,16 @@ public class SortingPanel extends JPanel{
 			// You'll follow the same process for each of the other sorting algorithms that you write.
 			// change sortingName variable to "Bubble Sort" so that the panel
 			// will say bubble sort while this sorting algorithm is running.
-/*
+			
 			createArray();
 			sortingName = "quicksort";
 			quickSort(getNumbers(), 0, getNumbers().length -1);
 			quickCompare = comparisons;
-*/
+			
 			createArray();
 			sortingName = "brutalSort";
 			brutalSort();
-			/*
+			
 			createArray();
 			sortingName = "selecSort";
 			selectionSort();
@@ -364,7 +366,7 @@ public class SortingPanel extends JPanel{
 			sortingName = "insertion sort";
 			insertionSort();
 			insertCompare = comparisons;
-			 */
+			 
 			/*
 			createArray();						
 			sortingName = "bubble sort";

@@ -2,7 +2,7 @@
 public class RecursionPracticeMain {
 
 	public static void main(String[] args) {
-		printx(5, 16499);
+		System.out.println(fibonacci(25));
 
 	}
 
@@ -14,5 +14,28 @@ public class RecursionPracticeMain {
 			printx(x, maxCount-1);
 		}
 	}
+	public static int add(int x) {
+		if (x==0)
+			return 0;
 
+
+		return x + add(x-1);
+
+	}
+
+	//f(n) = f(n-1) + f(n-2)
+	//f(0)) = 0
+	//f(1) = 1
+	public static int fibonacci(int n) {
+		if(n==0)
+			return 0;
+
+		else if (n==1)
+			return 1;
+		else
+			return fibonacci(n-1) + fibonacci(n-2);
+		
+	}
 }
+
+

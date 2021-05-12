@@ -367,12 +367,12 @@ public class SortingPanel extends JPanel{
 			insertionSort();
 			insertCompare = comparisons;
 			 
-			/*
+			
 			createArray();						
 			sortingName = "bubble sort";
 			bubbleSort();						
 			bubbleComparisons = comparisons;   
-			 */
+			
 
 			finish = true;						// finished is changed to true once all sorting algorithms have finished.
 			this.paintImmediately(getVisibleRect());

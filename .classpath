@@ -17,6 +17,7 @@
 	<classpathentry kind="src" path="Eclipse 2/Inheritance Project/src"/>
 	<classpathentry kind="src" path="Eclipse 2/SortingWithGraphics-master/SortingWithGraphics/src"/>
 	<classpathentry kind="src" path="Eclipse 2/Recursion Practice/src"/>
+	<classpathentry kind="src" path="Eclipse 2/Chess/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>

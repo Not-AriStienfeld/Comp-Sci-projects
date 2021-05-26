@@ -76,4 +76,8 @@ public class Piece {
 	public void setPlayer(int player) {
 		this.player = player;
 	}
+	
+	public String toString() {
+		return "THIS IS A PEICE";
+	}
 }

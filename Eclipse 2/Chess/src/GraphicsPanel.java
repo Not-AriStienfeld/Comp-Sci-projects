@@ -24,7 +24,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 	private Location from;   			    // holds the coordinates of the square that the user would like to move from.
 	private Location to;   				    // holds the coordinates of the square that the user would like to move to.
 	private boolean click;// false until the game has started by somebody clicking on the board.  should also be set to false
-	private int turn = 1;
+	private int turn = -1;
 	private int clickCount;
 	private int startX;
 	private int startY;
@@ -36,8 +36,14 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		setPreferredSize(new Dimension(SQUARE_WIDTH*8+OFFSET+2,SQUARE_WIDTH*8+OFFSET+2));   // Set these dimensions to the width 
 		board = new Piece[8][8];
 		clickCount = 0;
-		board[0][0] = new Rook(1);
-		board[1][1] = new Rook(-1);// of your background picture.   
+		
+		//start the board out in the right way
+		board[0][0] = new Rook(-1);
+		board[7][0] = new Rook(-1);
+		board[4][0] = new Queen(-1);
+		board[0][7] = new Rook(1);
+		board[7][7] = new Rook(1);
+		board[4][7] = new Queen(1);// of your background picture.   
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 
@@ -75,11 +81,11 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 
 		// instead of drawing a single piece you should loop through the two-dimensional array and draw each piece except for 
 		// empty spaces.
-		p.draw(g2, this, new Location(4,6));
+		
 
 
-		for(int i = 0; i < 7;i++) {
-			for(int j = 0; j < 7; j++) {
+		for(int i = 0; i < 8;i++) {
+			for(int j = 0; j < 8; j++) {
 				if(board[i][j] != null) {
 					board[i][j].draw(g2, this, new Location(j, i));
 				}

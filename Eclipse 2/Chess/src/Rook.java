@@ -8,22 +8,16 @@ public class Rook extends Piece {
 	// This png must be saved in the images folder and will be loaded 
 	// in the constructor.
 
-	private int player;					// This int will represent which team the piece is, 1 for yellow team, 
-	// 2 for black team. 
-
 	// method: Default constructor - see packed constructors comments for a description of parameters.
 	public Rook(){
 		this(1);
-	}
-	public void draw(Graphics g, Component c, Location l) {
-		image.paintIcon(c, g, l.column*90+45 , l.row*90+45 ); // you'll need to update the last two parameters so that it will 
-		// correctly draw the piece in the right location.
 	}
 
 	// method: Character's packed constructor
 	// description: Initialize a new Character object.
 	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
 	public Rook(int player){
+		super(player);
 		if(player ==1) {
 			setImageIcon("images2/rook1.png");
 		}
@@ -39,13 +33,6 @@ public class Rook extends Piece {
 	public Rook(int player, String imagePath){
 		setImageIcon(imagePath);
 		this.setPlayer(player);			
-	}
-
-	protected void setImageIcon(String imagePath){
-		ClassLoader cldr = this.getClass().getClassLoader();	
-
-		URL imageURL = cldr.getResource(imagePath);				
-		image = new ImageIcon(imageURL);
 	}
 
 	// method: isValidMove

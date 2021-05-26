@@ -65,9 +65,9 @@ public class Piece {
 	//			   Component c - this is the component that the image will be drawn onto.
 	//			   Location l - a Location that determines where to draw the piece.
 	public void draw(Graphics g, Component c, Location l) {
-        image.paintIcon(c, g, l.column*75, l.row*90); // you'll need to update the last two parameters so that it will 
-        											  // correctly draw the piece in the right location.
-    }
+		image.paintIcon(c, g, l.column*90+45 , l.row*90+45 ); // you'll need to update the last two parameters so that it will 
+		// correctly draw the piece in the right location.
+	}
 
 	public int getPlayer() {
 		return player;

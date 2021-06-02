@@ -39,16 +39,24 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		
 		//start the board out in the right way
 		board[0][0] = new Rook(-1);
-		board[7][0] = new Rook(-1);
-		board[3][0] = new King(-1);
-		board[4][0] = new Queen(-1);
-		board[0][7] = new Rook(1);
+		board[0][7] = new Rook(-1);
+		board[0][3] = new King(-1);
+		board[0][4] = new Queen(-1);
+		board[7][0] = new Rook(1);
 		board[7][7] = new Rook(1);
-		board[3][7] = new King(1);
-		board[4][7] = new Queen(1);
-		for(int i = 0; i < 8; i++) {
-			   board[i][6] = new pawn(1);
+		board[7][3] = new King(1);
+		board[7][4] = new Queen(1);
+/*		for(int i = 2; i < 7; i++) {
+			for(int j = 2; j< 7; j++) {
+				board[i][j] = null;
+			}
 		}
+		for(int i = 0; i < 8; i++) {
+			   board[6][i] = new pawn(1);
+		}
+		for(int i = 0; i < 8; i++) {
+			   board[1][i] = new pawn(-1);
+		} */
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 
@@ -92,7 +100,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		for(int i = 0; i < 8;i++) {
 			for(int j = 0; j < 8; j++) {
 				if(board[i][j] != null) {
-					board[i][j].draw(g2, this, new Location(j, i));
+					board[i][j].draw(g2, this, new Location(i, j));
 				}
 			}
 		}
@@ -109,18 +117,19 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 			startY = (int) (e.getY()-45)/90;
 			clickCount = 1;
 			System.out.println("selected " + startX + ", " + startY);
-			if(board[startX][startY] != null){
-				System.out.println(board[startX][startY].toString());
+			if(board[startY][startX] != null){
+				System.out.println(board[startY][startX].toString());
 			}
 
 		}else{
 			System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
 			clickCount  = 0;
+			
 			turn*= -1;
-			if(board[startX][startY] != null && board[startX][startY].getPlayer() == turn) {
-				if(board[startX][startY].isValidMove(new Location(startX, startY), new Location( (int) (e.getX()-45)/90, (int) (e.getY() -45)/90), board)) {
-					board[(int) (e.getX()-45)/90] [(int) (e.getY() -45)/90]= board[startX][startY];
-					board[startX][startY] = null;
+			if(board[startY][startX] != null && board[startY][startX].getPlayer() == turn) {
+				if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getX()-45)/90, (int) (e.getY() -45)/90), board)) {
+					board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
+					board[startY][startX] = null;
 				}
 			}
 		}

@@ -43,54 +43,63 @@ public class Rook extends Piece {
 	// @param - Piece[][]b - the chess board.  a two dimensional array of pieces.
 	// return - boolean - true if the move is valid 
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		double startX = from.getColumn();
-		double startY = from.getRow();
-		double finishX = to.getColumn();
-		double finishY = to.getRow();
+		int startX = from.getColumn();
+		int startY = from.getRow();
+		int finishX = to.getColumn();
+		int finishY = to.getRow();
 
 		boolean returnStatement = true;	
 
 		if( startX < finishX && finishY == startY) {
-			for(int i = (int)startX+1; i < finishX-1; i++) {
-				if (b[i][(int)finishY] != null) {
+			for(int i =  startX+1; i < finishX-1; i++) {
+				if (b[i][ finishY] != null) {
 					returnStatement = false;
+					System.out.println("1");
 				}
 			}
 		} else if( startX > finishX && finishY == startY) {
-			for(int i = (int)finishX-1; i > startX+1; i--) {
-				if (b[i][(int)finishY] != null) {
+			for(int i =  finishX-1; i > startX+1; i--) {
+				if (b[i][ finishY] != null) {
 					returnStatement = false;
+					System.out.println("2");
 				}
 			}
 		}
 
 
 		if( startY < finishY && finishX == startX) {
-			for(int i = (int)startY+1; i < finishY-1; i++) {
-				if (b[(int) finishX][i] != null) {
+			for(int i =  startY+1; i < finishY-1; i++) {
+				if (b[  finishX][i] != null) {
 					returnStatement = false;
+					System.out.println("3");
 				}
 			}
 		} else if( startY > finishY && finishX == startX) {
-			for(int i = (int)finishY-1; i > startY-1; i--) {
-				if (b[(int) finishX][i] != null) {
+			for(int i =  finishY-1; i > startY-1; i--) {
+				if (b[  finishX][i] != null) {
 					returnStatement = false;
+					System.out.println("4");
 				}
 			}
 		}
 
-		if(startX != finishX && startY != finishY) {
+		/*if(startX != finishX && startY != finishY) {
 			returnStatement = false;
-		}
+			System.out.println("5");
+		}*/
 
-		//if(b[(int) finishX][(int)finishY] != null) {
-		//	if(b[(int) finishX][(int)finishY].getPlayer() ==b[(int)startX][(int)startY].getPlayer()){
+		//if(b[  finishX][ finishY] != null) {
+		//	if(b[  finishX][ finishY].getPlayer() ==b[ startX][ startY].getPlayer()){
 		//		returnStatement = false;
 		//	}}
-		if (b[(int)finishX][(int)finishY]!=null&&b[(int)finishX][(int)finishY].getPlayer()!=b[(int)startX][(int)startY].getPlayer()){
-			returnStatement = false;
+		if(returnStatement) {
+			returnStatement = validMove(  finishX,   finishY, b);
 		}
 		return returnStatement;
+	}
+
+	public String toString() {
+		return "this is a rook";
 	}
 
 

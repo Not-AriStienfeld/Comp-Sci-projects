@@ -116,12 +116,15 @@ public class Queen extends Piece {
 		}
 
 
-		if(b[(int) finishX][(int)finishY] != null) {
-			if(b[(int) finishX][(int)finishY].getPlayer() ==b[(int)startX][(int)startY].getPlayer()){
-				returnStatement = false;
-			}}
+		if (!validMove((int) finishX, (int) finishY, b)){
+			returnStatement = false;
+		}
 
 		return returnStatement;
+	}
+	
+	public String toString() {
+		return "this is a queen, YASS";
 	}
 
 

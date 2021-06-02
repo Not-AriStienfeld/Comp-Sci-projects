@@ -8,22 +8,23 @@
 import java.awt.Component;
 import java.awt.Graphics;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.swing.ImageIcon;
 
 public class Piece {
 	private ImageIcon image;			// The ImageIcon will be used to hold the Character's png.
-										// This png must be saved in the images folder and will be loaded 
-										// in the constructor.
-	
+	// This png must be saved in the images folder and will be loaded 
+	// in the constructor.
+
 	private int player;					// This int will represent which team the piece is, 1 for yellow team, 
-									    // 2 for black team. 
-	
+	// 2 for black team. 
+
 	// method: Default constructor - see packed constructors comments for a description of parameters.
 	public Piece(){
 		this(1);
 	}
-		
+
 	// method: Character's packed constructor
 	// description: Initialize a new Character object.
 	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
@@ -31,7 +32,7 @@ public class Piece {
 		setImageIcon("images/king1.png");
 		this.setPlayer(player);			
 	}
-	
+
 	// method: Character's packed constructor
 	// description: Initialize a new Character object.
 	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
@@ -39,14 +40,14 @@ public class Piece {
 		setImageIcon(imagePath);
 		this.setPlayer(player);			
 	}
-	
+
 	protected void setImageIcon(String imagePath){
 		ClassLoader cldr = this.getClass().getClassLoader();	
-		
+
 		URL imageURL = cldr.getResource(imagePath);				
-        image = new ImageIcon(imageURL);
+		image = new ImageIcon(imageURL);
 	}
-	
+
 	// method: isValidMove
 	// description: This method checks to see if a move is valid.
 	// Returns whether or not the attempted move is valid.
@@ -57,7 +58,7 @@ public class Piece {
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
 		return false;
 	}
-	
+
 	// method: draw
 	// description: This method is used to draw the image onto the GraphicsPanel.  You shouldn't need to 
 	//				modify this method.
@@ -76,8 +77,28 @@ public class Piece {
 	public void setPlayer(int player) {
 		this.player = player;
 	}
-	
+
 	public String toString() {
 		return "THIS IS A PEICE";
+	}
+
+	public boolean validMove(int toX, int toY, Piece[][]b)  {
+		boolean condition = true;
+		if(!Objects.isNull(b[toY][toX]) ) {
+			System.out.println("exists");
+			if (b[toY][toX].getPlayer() == player){
+				System.out.println("6");
+				condition = false;
+
+
+
+			}else{
+				System.out.println("Valid");
+			}
+		}else {
+			System.out.println("doesn't exist");
+		}
+
+		return condition;
 	}
 }

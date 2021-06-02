@@ -47,17 +47,20 @@ public class Queen extends Piece {
 		double startY = from.getRow();
 		double finishX = to.getColumn();
 		double finishY = to.getRow();
+		
+		boolean returnStatement = true;
+		
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
 			if( startX < finishX && finishY == startY) {
 				for(int i = (int)startX+1; i < finishX-1; i++) {
 					if (b[i][(int)finishY] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			} else if( startX > finishX && finishY == startY) {
 				for(int i = (int)finishX-1; i > startX+1; i--) {
 					if (b[i][(int)finishY] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}
@@ -66,54 +69,59 @@ public class Queen extends Piece {
 			if( startY < finishY && finishX == startX) {
 				for(int i = (int)startY+1; i < finishY-1; i++) {
 					if (b[(int) finishX][i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			} else if( startY > finishY && finishX == startX) {
 				for(int i = (int)finishY-1; i > startY-1; i--) {
 					if (b[(int) finishX][i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}
 			if(startX != finishX && startY != finishY) {
-				return false;
+				returnStatement = false;
 			}
 
 		}else {
 			if(finishX-startX>0 && finishY - startY > 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX + i][(int)startY+i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}else if(finishX-startX<0 && finishY - startY < 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX - i][(int)startY-i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}else if(finishX-startX<0 && finishY - startY > 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX - i][(int)startY+i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}else if(finishX-startX>0 && finishY -startY < 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX + i][(int)startY-i] != null) {
-						return false;
+						returnStatement = false;
 					}
 				}
 			}
 		}
+		
+		if(startX == finishX && startY == finishY) {
+			returnStatement = false;
+		}
+
 
 		if(b[(int) finishX][(int)finishY] != null) {
-			if(b[(int) finishX][(int)finishY].getPlayer() == getPlayer()){
-				return false;
+			if(b[(int) finishX][(int)finishY].getPlayer() ==b[(int)startX][(int)startY].getPlayer()){
+				returnStatement = false;
 			}}
 
-		return true;
+		return returnStatement;
 	}
 
 

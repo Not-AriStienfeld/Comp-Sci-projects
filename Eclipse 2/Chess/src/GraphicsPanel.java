@@ -40,10 +40,15 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		//start the board out in the right way
 		board[0][0] = new Rook(-1);
 		board[7][0] = new Rook(-1);
+		board[3][0] = new King(-1);
 		board[4][0] = new Queen(-1);
 		board[0][7] = new Rook(1);
 		board[7][7] = new Rook(1);
-		board[4][7] = new Queen(1);// of your background picture.   
+		board[3][7] = new King(1);
+		board[4][7] = new Queen(1);
+		for(int i = 0; i < 8; i++) {
+			   board[i][6] = new pawn(1);
+		}
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 

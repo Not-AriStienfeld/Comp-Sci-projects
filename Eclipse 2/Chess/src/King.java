@@ -3,26 +3,26 @@ import java.awt.Graphics;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
-public class Rook extends Piece {
+public class King extends Piece {
 	private ImageIcon image;			// The ImageIcon will be used to hold the Character's png.
 	// This png must be saved in the images folder and will be loaded 
 	// in the constructor.
 
 	// method: Default constructor - see packed constructors comments for a description of parameters.
-	public Rook(){
+	public King(){
 		this(1);
 	}
 
 	// method: Character's packed constructor
 	// description: Initialize a new Character object.
 	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
-	public Rook(int player){
+	public King(int player){
 		super(player);
 		if(player ==1) {
-			setImageIcon("images2/rook1.png");
+			setImageIcon("images2/king1.png");
 		}
 		else {
-			setImageIcon("images2/rook2.png");
+			setImageIcon("images2/king2.png");
 		}
 		this.setPlayer(player);			
 	}
@@ -30,7 +30,7 @@ public class Rook extends Piece {
 	// method: Character's packed constructor
 	// description: Initialize a new Character object.
 	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
-	public Rook(int player, String imagePath){
+	public King(int player, String imagePath){
 		setImageIcon(imagePath);
 		this.setPlayer(player);			
 	}
@@ -47,49 +47,24 @@ public class Rook extends Piece {
 		double startY = from.getRow();
 		double finishX = to.getColumn();
 		double finishY = to.getRow();
-
-		boolean returnStatement = true;	
-
-		if( startX < finishX && finishY == startY) {
-			for(int i = (int)startX+1; i < finishX-1; i++) {
-				if (b[i][(int)finishY] != null) {
-					returnStatement = false;
-				}
-			}
-		} else if( startX > finishX && finishY == startY) {
-			for(int i = (int)finishX-1; i > startX+1; i--) {
-				if (b[i][(int)finishY] != null) {
-					returnStatement = false;
-				}
-			}
+		
+		boolean returnStatement = false;
+		
+		if(Math.abs(startX-finishX) > 1) {
+			returnStatement = false;
 		}
-
-
-		if( startY < finishY && finishX == startX) {
-			for(int i = (int)startY+1; i < finishY-1; i++) {
-				if (b[(int) finishX][i] != null) {
-					returnStatement = false;
-				}
-			}
-		} else if( startY > finishY && finishX == startX) {
-			for(int i = (int)finishY-1; i > startY-1; i--) {
-				if (b[(int) finishX][i] != null) {
-					returnStatement = false;
-				}
-			}
+		if(Math.abs(startY-finishY) > 1) {
+			returnStatement = false;
 		}
-
-		if(startX != finishX && startY != finishY) {
+		if(startX == finishX && startY == finishY) {
 			returnStatement = false;
 		}
 
-		//if(b[(int) finishX][(int)finishY] != null) {
-		//	if(b[(int) finishX][(int)finishY].getPlayer() ==b[(int)startX][(int)startY].getPlayer()){
-		//		returnStatement = false;
-		//	}}
-		if (b[(int)finishX][(int)finishY]!=null&&b[(int)finishX][(int)finishY].getPlayer()!=b[(int)startX][(int)startY].getPlayer()){
-			returnStatement = false;
-		}
+
+		if(b[(int) finishX][(int)finishY] != null) {
+			if(b[(int) finishX][(int)finishY].getPlayer() ==b[(int)startX][(int)startY].getPlayer()){
+				returnStatement = false;
+			}}
 		return returnStatement;
 	}
 

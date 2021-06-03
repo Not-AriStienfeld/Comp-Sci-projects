@@ -1,8 +1,8 @@
+import java.util.Objects;
+
 public class pawn extends Piece{
-	private boolean hasMoved;
 	public pawn(int player) {
 		super(player);
-		hasMoved=false;
 		if(player==1) {
 			setImageIcon("images2/pawn1.png");
 		}
@@ -13,17 +13,21 @@ public class pawn extends Piece{
 	@Override
 	public boolean isValidMove(Location from, Location to, Piece[][] board) {
 		boolean canMove=false;
-		if(from.getColumn()==to.getColumn()&&hasMoved==false&&(from.getRow()==to.getRow()+1||from.getRow()==to.getRow()+2))
+		if(super.getPlayer()==1&&from.getColumn()==to.getColumn()&&(from.getRow()==6)&&(from.getRow()==to.getRow()+1||from.getRow()==to.getRow()+2)&&board[to.getRow()][to.getColumn()]==null&& Objects.isNull(board[to.row][to.column])&& Objects.isNull(board[to.row+1][to.column])) {
 			canMove=true;
-		else if(from.getColumn()==to.getColumn()&&from.getRow()==to.getRow()+1) {
+		}else if(super.getPlayer()==-1&&from.getColumn()==to.getColumn()&&from.getRow()==1&&(from.getRow()==to.getRow()-1||from.getRow()==to.getRow()-2)&&board[to.getRow()][to.getColumn()]==null && Objects.isNull(board[to.row][to.column])&& Objects.isNull(board[to.row-1][to.column])) {
 			canMove=true;
-		}else if(true) {
+		}else if(from.getColumn()==to.getColumn()&&from.getRow()==to.getRow()+1 && Objects.isNull(board[to.row][to.column])) {
+
+			canMove=true;
+		}/*Capturing*/else if((from.getColumn()==to.getColumn()-1||from.getColumn()==to.getColumn()+1)&&from.getRow()==to.getRow()+1&&board[to.getRow()][to.getColumn()]!=null) {
 			canMove=true;
 		}
-			
-		//THIS IS A PLACEHOLDER
+		if((board[to.row][to.column] != null && board[to.row][to.column].getPlayer() == getPlayer())) {
+			canMove =  false;
+
+		}	
 		if(canMove) {
-			hasMoved=true;
 			return true;
 		}
 		return false;

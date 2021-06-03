@@ -49,13 +49,15 @@ public class Queen extends Piece {
 		double finishY = to.getRow();
 
 		boolean returnStatement = true;
-		//works, I'm an idiot
+		//checks for a self capture
 		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer())) {
 			returnStatement =  false;
 
 		}
-
+		//checks if the movement is like a rook
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
+
+			//if it is going down
 			if( startX < finishX && finishY == startY) {
 				for(int i = (int)startX+1; i < finishX-1; i++) {
 					if (b[i][(int)finishY] != null) {
@@ -63,6 +65,8 @@ public class Queen extends Piece {
 
 					}
 				}
+
+				//if it is going up
 			} else if( startX > finishX && finishY == startY) {
 				for(int i = (int)finishX-1; i > startX+1; i--) {
 					if (b[i][(int)finishY] != null) {
@@ -72,7 +76,7 @@ public class Queen extends Piece {
 				}
 			}
 
-
+			//if it is going right
 			if( startY < finishY && finishX == startX) {
 				for(int i = (int)startY+1; i < finishY-1; i++) {
 					if (b[(int) finishX][i] != null) {
@@ -80,6 +84,8 @@ public class Queen extends Piece {
 
 					}
 				}
+			
+			//if it is going left
 			} else if( startY > finishY && finishX == startX) {
 				for(int i = (int)finishY-1; i > startY-1; i--) {
 					if (b[(int) finishX][i] != null) {
@@ -88,25 +94,38 @@ public class Queen extends Piece {
 					}
 				}
 			}
+			
+			//if it is moving as it should
 			if(startX != finishX && startY != finishY) {
 				returnStatement = false;
 
 			}
-
+		
+		//checks for bishop like movement
 		}else {
+			
+			//repeats for how far it moved
 			for(int i = 1; i < to.column - from.column; i++) {
+				
+				//checks down right
 				if(to.row > from.row && to.column > from.column) {
 					if(b[from.row + i][from.column + i] != null) 
 						return false;
 				}
+				
+				//checks down left
 				else if(to.row > from.row && to.column < from.column) {
 					if(b[from.row + i][from.column - i] != null) 
 						return false;
 				}
+				
+				//checks up right
 				else if(to.row < from.row && to.column > from.column) {
 					if(b[from.row - i][from.column + i] != null) 
 						return false;
 				}
+				
+				//checks up left
 				else if(to.row < from.row && to.column < from.column) {
 					if(b[from.row - i][from.column - i] != null) 
 						return false;
@@ -115,6 +134,7 @@ public class Queen extends Piece {
 			}
 		}
 
+		//stops the classic queen suicide
 		if(startX == finishX && startY == finishY) {
 			returnStatement = false;
 

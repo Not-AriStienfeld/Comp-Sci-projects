@@ -1,5 +1,8 @@
 import java.util.Objects;
-
+//Project Name: pawn
+//Project Description: the most important piece in chess. can't en passent
+//Date: Jun 3, 2021
+//Written By: Ari Steinfeld + Andy Sun
 public class pawn extends Piece{
 	public pawn(int player) {
 		super(player);

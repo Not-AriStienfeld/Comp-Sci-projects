@@ -1,10 +1,8 @@
 // Class: Piece
 // Written by: Mr. Swope
+// Modified by: Ari Steinfeld
 // Date: 10/28/15
-// Description: This class implements a Piece.  This Piece will be drawn onto a graphics panel. 
-// 
-// If you modify this class you should add comments that describe when and how you modified the class.  
-
+// Description: what is inherited
 import java.awt.Component;
 import java.awt.Graphics;
 import java.net.URL;

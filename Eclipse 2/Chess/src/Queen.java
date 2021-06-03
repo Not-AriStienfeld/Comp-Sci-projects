@@ -1,4 +1,8 @@
 import java.awt.Component;
+//Project Name: Queen
+//Project Description: is a queen. basically an epic remix of rook and bishop
+//Date: Jun 3, 2021
+//Written By: Ari Steinfeld
 import java.awt.Graphics;
 import java.net.URL;
 

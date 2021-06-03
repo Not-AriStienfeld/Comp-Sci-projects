@@ -50,13 +50,13 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 			for(int j = 2; j< 7; j++) {
 				board[i][j] = null;
 			}
-		}
+		}/*
 		for(int i = 0; i < 8; i++) {
 			   board[6][i] = new pawn(1);
 		}
 		for(int i = 0; i < 8; i++) {
 			   board[1][i] = new pawn(-1);
-		} 
+		} */
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 

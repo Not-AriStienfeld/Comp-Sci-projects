@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 //Project Name: Rook
 //Project Description: is a rook
 //Date: Jun 2, 2021
@@ -39,6 +41,7 @@ public class Rook extends Piece{
 		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()))
 			canMove =  false;
 
+		//gonna be honest, I shouldn't need this here, but the code doesn't really work if I remove it. 
 		if(Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1) {
 			canMove =  false;
 		}
@@ -48,12 +51,12 @@ public class Rook extends Piece{
 			for(int i = 1; i < Math.abs(to.row-from.row); i++) {
 				//down
 				if(to.row > from.row) {
-					if(b[from.row + i][from.column] != null) 
+					if(!Objects.isNull(b[from.row + i][from.column])) 
 						canMove =  false;
 				}
 				//up
 				if(to.row < from.row) {
-					if(b[from.row - i][from.column] != null) 
+					if(!Objects.isNull(b[from.row - i][from.column])) 
 						canMove =  false;			
 				}
 			}
@@ -64,17 +67,21 @@ public class Rook extends Piece{
 			//if it is moving right
 			if(to.column-from.column > 0) {
 				for(int i = 1; i < Math.abs(to.column-from.column); i++) {
-					if(b[from.row][from.column + i] != null) 
+					if(!Objects.isNull(b[from.row][from.column + i])) 
 						canMove = false;
 				}
 			}
 			//if it is going left
 			if(to.column-from.column < 0) {
 				for(int i = 1; i < Math.abs(to.column-from.column); i++) {
-					if(b[from.row][from.column - i] != null) 
+					if(!Objects.isNull(b[from.row][from.column - i])) 
 						canMove = false;
 				}
 			}
+			
+			//if you want to know why the code looks different for left-right vs updown, its because
+			//as I was troubleshooting I tried making them different, until I realized
+			//the issue was in the gpannel
 		}
 
 

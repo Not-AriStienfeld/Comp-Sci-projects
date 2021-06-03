@@ -1,35 +1,36 @@
 public class pawn extends Piece{
+	private boolean hasMoved;
 	public pawn(int player) {
+		super(player);
+		hasMoved=false;
 		if(player==1) {
 			setImageIcon("images2/pawn1.png");
-			super.setPlayer(player);
 		}
 		else {
 			setImageIcon("images2/pawn2.png");
-			super.setPlayer(player);
 		}
 	}
 	@Override
 	public boolean isValidMove(Location from, Location to, Piece[][] board) {
-		int fromX=from.getColumn();
-		int fromY=from.getRow();
-		int toX=to.getColumn();
-		int toY=to.getRow();
-		
-		if(/*first move*/fromX==toX
-				&&(fromX==1||fromX==7)&&(toY==3||toY==5)
-				&&board[fromX][toY]==null||/*regular movement*/(fromX==toX
-				&&(fromX==1||fromX==7)
-				&&board[fromX][toY]==null
-				&&fromY==toY+1 /*capturing*/||(fromX!=toX
-				&&(board[toX][toY]!=null
-				&&board[toX][toY].getPlayer()!=board[fromX][fromY].getPlayer())
-				&&(fromY==toY+1
-				&&(fromX==toX+1||fromX==toX-1))))) {
+		boolean canMove=false;
+		if(from.getColumn()==to.getColumn()&&hasMoved==false&&(from.getRow()==to.getRow()+1||from.getRow()==to.getRow()+2))
+			canMove=true;
+		else if(from.getColumn()==to.getColumn()&&from.getRow()==to.getRow()+1) {
+			canMove=true;
+		}else if(true) {
+			canMove=true;
+		}
+			
+		//THIS IS A PLACEHOLDER
+		if(canMove) {
+			hasMoved=true;
 			return true;
 		}
-		else
-			return false;
+		return false;
+	}
+	@Override
+	public String toString() {
+		return "pawnlol";
 	}
 }
 

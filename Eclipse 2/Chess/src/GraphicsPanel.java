@@ -1,10 +1,8 @@
 // Class: GraphicsPanel
 // Written by: Mr. Swope
+// Heavily moddified: Ari Steinfeld
 // Date: 12/2/15
-// Description: This class is the main class for this project.  It extends the Jpanel class and will be drawn on
-// 				on the JPanel in the GraphicsMain class.  
-//
-// Since you will modify this class you should add comments that describe when and how you modified the class.  
+// Description: I kind of got bored and coded a ton  
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,6 +27,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 	private int clickCount;
 	private int startX;
 	private int startY;
+	private boolean gameOver;
 	// after an attempted move.
 	private Piece[][] board; 				// an 8x8 board of 'Pieces'.  Each spot should be filled by one of the chess pieces or a 'space'. 
 
@@ -37,6 +36,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		setPreferredSize(new Dimension(SQUARE_WIDTH*8+OFFSET+2,SQUARE_WIDTH*8+OFFSET+2));   // Set these dimensions to the width 
 		board = new Piece[8][8];
 		clickCount = 0;
+		gameOver = false;
 
 		//start the board out in the right way
 		board[0][0] = new Rook(-1);
@@ -51,13 +51,13 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 			for(int j = 2; j< 7; j++) {
 				board[i][j] = null;
 			}
-		}/*
+		}
 		for(int i = 0; i < 8; i++) {
 			   board[6][i] = new pawn(1);
 		}
 		for(int i = 0; i < 8; i++) {
 			   board[1][i] = new pawn(-1);
-		} */
+		} 
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 
@@ -111,40 +111,57 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// use math to figure out the row and column that was clicked.
-		System.out.println("x = " + e.getX());
-		System.out.println("y = " + e.getY());
-		if (clickCount == 0) {
-			startX = (int) (e.getX() -45)/90;
-			startY = (int) (e.getY()-45)/90;
-			clickCount = 1;
-			System.out.println("selected " + startX + ", " + startY);
-			if(board[startY][startX] != null){
-				System.out.println(board[startY][startX].toString());
-			}
+		//System.out.println("x = " + e.getX());
+		//System.out.println("y = " + e.getY());
+		
+		//checks for win condition
+		if(!gameOver) {
+			
+			//selecting a piece
+			if (clickCount == 0) {
+				startX = (int) (e.getX() -45)/90;
+				startY = (int) (e.getY()-45)/90;
+				clickCount = 1;
+				System.out.println("selected " + startX + ", " + startY);
+				if(board[startY][startX] != null){
+					//System.out.println(board[startY][startX].toString());
+				}
+			
+			//choosing where you want to go
+			}else{
 
-		}else{
-
-			System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
-			clickCount  = 0;
-
-			turn*= -1;
-			if(board[startY][startX] != null && board[startY][startX].getPlayer() == turn) {
-				if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getY()-45)/90, (int) (e.getX() -45)/90), board)) {
-					if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == 1) {
-						for(int i = 0; i < 8; i++) {
-							for(int j = 0; j < 8; j++) {
-								board[i][j] = new King(-1);
+				System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
+				clickCount  = 0;
+				turn*= -1;
+				
+				//checks if the move is valid
+				if(board[startY][startX] != null && board[startY][startX].getPlayer() == turn) {
+					if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getY()-45)/90, (int) (e.getX() -45)/90), board)) {
+						
+						//if the move IS valid, then this will check to see if a king is getting taken
+						if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == 1) {
+							for(int i = 0; i < 8; i++) {
+								for(int j = 0; j < 8; j++) {
+									board[i][j] = new King(-1);
+									
+								}
 							}
-						}
-					}else if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == -1) {
-						for(int i = 0; i < 8; i++) {
-							for(int j = 0; j < 8; j++) {
-								board[i][j] = new King(1);
+							gameOver = true;
+							System.out.println("BLACK WINS");
+						}else if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == -1) {
+							for(int i = 0; i < 8; i++) {
+								for(int j = 0; j < 8; j++) {
+									board[i][j] = new King(1);
+
+								}
 							}
+							gameOver = true;									
+							System.out.println("WHITE WINS");
+						}else {
+							//if the move is valid but the piece isn't a king, then normalness ensues. 
+							board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
+							board[startY][startX] = null;
 						}
-					}else {
-						board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
-						board[startY][startX] = null;
 					}
 				}
 			}

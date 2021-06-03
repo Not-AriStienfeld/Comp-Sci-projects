@@ -52,22 +52,22 @@ public class Queen extends Piece {
 		//works, I'm an idiot
 		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer())) {
 			returnStatement =  false;
-			System.out.println("JOE");
+
 		}
-		
+
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
 			if( startX < finishX && finishY == startY) {
 				for(int i = (int)startX+1; i < finishX-1; i++) {
 					if (b[i][(int)finishY] != null) {
 						returnStatement = false;
-						System.out.println("1");
+
 					}
 				}
 			} else if( startX > finishX && finishY == startY) {
 				for(int i = (int)finishX-1; i > startX+1; i--) {
 					if (b[i][(int)finishY] != null) {
 						returnStatement = false;
-						System.out.println("2");
+
 					}
 				}
 			}
@@ -77,57 +77,47 @@ public class Queen extends Piece {
 				for(int i = (int)startY+1; i < finishY-1; i++) {
 					if (b[(int) finishX][i] != null) {
 						returnStatement = false;
-						System.out.println("3");
+
 					}
 				}
 			} else if( startY > finishY && finishX == startX) {
 				for(int i = (int)finishY-1; i > startY-1; i--) {
 					if (b[(int) finishX][i] != null) {
 						returnStatement = false;
-						System.out.println("4");
+
 					}
 				}
 			}
 			if(startX != finishX && startY != finishY) {
 				returnStatement = false;
-				System.out.println("5");
+
 			}
 
 		}else {
-			if(finishX-startX>0 && finishY - startY > 0) {
-				for(int i = (int) (startX+1); i < finishX-1; i++) {
-					if(b[(int)startX + i][(int)startY+i] != null) {
-						returnStatement = false;
-						System.out.println("7");
-					}
+			for(int i = 1; i < to.column - from.column; i++) {
+				if(to.row > from.row && to.column > from.column) {
+					if(b[from.row + i][from.column + i] != null) 
+						return false;
 				}
-			}else if(finishX-startX<0 && finishY - startY < 0) {
-				for(int i = (int) (startX+1); i < finishX-1; i++) {
-					if(b[(int)startX - i][(int)startY-i] != null) {
-						returnStatement = false;
-						System.out.println("8");
-					}
+				else if(to.row > from.row && to.column < from.column) {
+					if(b[from.row + i][from.column - i] != null) 
+						return false;
 				}
-			}else if(finishX-startX<0 && finishY - startY > 0) {
-				for(int i = (int) (startX+1); i < finishX-1; i++) {
-					if(b[(int)startX - i][(int)startY+i] != null) {
-						returnStatement = false;
-						System.out.println("9");
-					}
+				else if(to.row < from.row && to.column > from.column) {
+					if(b[from.row - i][from.column + i] != null) 
+						return false;
 				}
-			}else if(finishX-startX>0 && finishY -startY < 0) {
-				for(int i = (int) (startX+1); i < finishX-1; i++) {
-					if(b[(int)startX + i][(int)startY-i] != null) {
-						returnStatement = false;
-						System.out.println("10");
-					}
+				else if(to.row < from.row && to.column < from.column) {
+					if(b[from.row - i][from.column - i] != null) 
+						return false;
 				}
+
 			}
 		}
 
 		if(startX == finishX && startY == finishY) {
 			returnStatement = false;
-			System.out.println("12");
+
 		}
 
 

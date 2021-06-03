@@ -48,9 +48,6 @@ public class King extends Piece {
 
 
 		if(Math.abs(to.row - from.row)  > 1 || Math.abs(to.column - from.column)    > 1) {
-			System.out.println("hi");
-			System.out.println(Math.abs(to.row - from.row) + " ROW" + to.row + " " + from.row);
-			System.out.println(Math.abs(to.column - from.column) + "COLUMN" + to.column + " " + from.column);
 			return false;
 			
 		}

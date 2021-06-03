@@ -84,9 +84,10 @@ public class Piece {
 
 	public boolean validMove(int toX, int toY, Piece[][]b)  {
 		boolean condition = true;
-		if(!Objects.isNull(b[toY][toX]) ) {
+		if(!Objects.isNull(b[toX][toY]) ) {
 			System.out.println("exists");
-			if (b[toY][toX].getPlayer() == player){
+			System.out.println("AAAAA" + b[toX][toY].toString());
+			if (b[toX][toY].getPlayer() == player){
 				System.out.println("6");
 				condition = false;
 

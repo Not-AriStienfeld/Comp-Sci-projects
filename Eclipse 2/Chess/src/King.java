@@ -43,24 +43,24 @@ public class King extends Piece {
 	// @param - Piece[][]b - the chess board.  a two dimensional array of pieces.
 	// return - boolean - true if the move is valid 
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		int startX = from.getColumn();
-		int startY = from.getRow();
-		int finishX = to.getColumn();
-		int finishY = to.getRow();
 		
-		
-		
-		
-		if(Math.abs(startY-finishY) > 1 || (startX == finishX && startY == finishY) || Math.abs(startX-finishX) > 1 || (!validMove( finishX,  finishY, b))) {
+
+
+
+		if(Math.abs(to.row - from.row)  > 1 || Math.abs(to.column - from.column)    > 1) {
+			System.out.println("hi");
+			System.out.println(Math.abs(to.row - from.row) + " ROW" + to.row + " " + from.row);
+			System.out.println(Math.abs(to.column - from.column) + "COLUMN" + to.column + " " + from.column);
 			return false;
+			
 		}
-		
+		if(b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == b[from.row][from.column].getPlayer())
+			return false;
 
-
-		
 		return true;
+
 	}
-	
+
 	public String toString() {
 		return "this is a king";
 	}

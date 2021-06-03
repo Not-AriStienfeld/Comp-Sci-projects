@@ -46,7 +46,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		board[7][7] = new Rook(1);
 		board[7][3] = new King(1);
 		board[7][4] = new Queen(1);
-/*		for(int i = 2; i < 7; i++) {
+		for(int i = 2; i < 7; i++) {
 			for(int j = 2; j< 7; j++) {
 				board[i][j] = null;
 			}
@@ -56,7 +56,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		}
 		for(int i = 0; i < 8; i++) {
 			   board[1][i] = new pawn(-1);
-		} */
+		} 
 		this.setFocusable(true);					 // for keylistener
 		this.addMouseListener(this);
 
@@ -122,12 +122,13 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 			}
 
 		}else{
+			
 			System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
 			clickCount  = 0;
 			
 			turn*= -1;
 			if(board[startY][startX] != null && board[startY][startX].getPlayer() == turn) {
-				if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getX()-45)/90, (int) (e.getY() -45)/90), board)) {
+				if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getY()-45)/90, (int) (e.getX() -45)/90), board)) {
 					board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
 					board[startY][startX] = null;
 				}

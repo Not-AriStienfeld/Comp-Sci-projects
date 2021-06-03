@@ -49,18 +49,27 @@ public class Queen extends Piece {
 		double finishY = to.getRow();
 		
 		boolean returnStatement = true;
+		//works, I'm an idiot
+				if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()))
+					returnStatement =  false;
+
+				if(Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1) {
+					returnStatement =  false;
+				}
 		
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
 			if( startX < finishX && finishY == startY) {
 				for(int i = (int)startX+1; i < finishX-1; i++) {
 					if (b[i][(int)finishY] != null) {
 						returnStatement = false;
+						System.out.println("1");
 					}
 				}
 			} else if( startX > finishX && finishY == startY) {
 				for(int i = (int)finishX-1; i > startX+1; i--) {
 					if (b[i][(int)finishY] != null) {
 						returnStatement = false;
+						System.out.println("2");
 					}
 				}
 			}
@@ -70,17 +79,20 @@ public class Queen extends Piece {
 				for(int i = (int)startY+1; i < finishY-1; i++) {
 					if (b[(int) finishX][i] != null) {
 						returnStatement = false;
+						System.out.println("3");
 					}
 				}
 			} else if( startY > finishY && finishX == startX) {
 				for(int i = (int)finishY-1; i > startY-1; i--) {
 					if (b[(int) finishX][i] != null) {
 						returnStatement = false;
+						System.out.println("4");
 					}
 				}
 			}
 			if(startX != finishX && startY != finishY) {
 				returnStatement = false;
+				System.out.println("5");
 			}
 
 		}else {
@@ -88,24 +100,28 @@ public class Queen extends Piece {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX + i][(int)startY+i] != null) {
 						returnStatement = false;
+						System.out.println("7");
 					}
 				}
 			}else if(finishX-startX<0 && finishY - startY < 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX - i][(int)startY-i] != null) {
 						returnStatement = false;
+						System.out.println("8");
 					}
 				}
 			}else if(finishX-startX<0 && finishY - startY > 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX - i][(int)startY+i] != null) {
 						returnStatement = false;
+						System.out.println("9");
 					}
 				}
 			}else if(finishX-startX>0 && finishY -startY < 0) {
 				for(int i = (int) (startX+1); i < finishX-1; i++) {
 					if(b[(int)startX + i][(int)startY-i] != null) {
 						returnStatement = false;
+						System.out.println("10");
 					}
 				}
 			}
@@ -113,12 +129,11 @@ public class Queen extends Piece {
 		
 		if(startX == finishX && startY == finishY) {
 			returnStatement = false;
+			System.out.println("12");
 		}
 
 
-		if (!validMove((int) finishX, (int) finishY, b)){
-			returnStatement = false;
-		}
+		
 
 		return returnStatement;
 	}

@@ -1,106 +1,83 @@
-import java.awt.Component;
-import java.awt.Graphics;
-import java.net.URL;
+//Project Name: Rook
+//Project Description: is a rook
+//Date: Jun 2, 2021
+//Written By: Ari Steinfeld
+//Notes: made with blood, sweat, and A LOT OF TEARS!
+public class Rook extends Piece{
 
-import javax.swing.ImageIcon;
-public class Rook extends Piece {
-	private ImageIcon image;			// The ImageIcon will be used to hold the Character's png.
-	// This png must be saved in the images folder and will be loaded 
-	// in the constructor.
+	public Rook(int player) {
+		super();
 
-	// method: Default constructor - see packed constructors comments for a description of parameters.
-	public Rook(){
-		this(1);
-	}
-
-	// method: Character's packed constructor
-	// description: Initialize a new Character object.
-	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
-	public Rook(int player){
-		super(player);
-		if(player ==1) {
+		//sets the icon based on player
+		if(player == 1) {
 			setImageIcon("images2/rook1.png");
-		}
-		else {
+		}else {
 			setImageIcon("images2/rook2.png");
 		}
 		this.setPlayer(player);			
 	}
-
-	// method: Character's packed constructor
-	// description: Initialize a new Character object.
-	// parameters: int player - should be either 1 or 2. 1 for yellow team, 2 for black team.
 	public Rook(int player, String imagePath){
-		setImageIcon(imagePath);
-		this.setPlayer(player);			
+		super(player, imagePath);	
 	}
 
-	// method: isValidMove
-	// description: This method checks to see if a move is valid.
-	// Returns whether or not the attempted move is valid.
-	// @param - Location from - the location that the piece will be moved from
-	// @param - Location to - the location that the piece will be moved to
-	// @param - Piece[][]b - the chess board.  a two dimensional array of pieces.
-	// return - boolean - true if the move is valid 
+	//name: isValidMove
+	//does: checks if move is valid (duh)
+	//working? not quite, can still take own peices
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		int startX = from.getColumn();
-		int startY = from.getRow();
-		int finishX = to.getColumn();
-		int finishY = to.getRow();
+		
+		
+	
+		//I decided to take this approach because it would help me troubleshoot by being able to find multiple errors is one move.
+		boolean canMove = true;
+		
+		//makes sure it is a valid rook move and not a random click
+		if(to.row != from.row && to.column != from.column)
+			canMove = false;
+		
+		
+		//works, I'm an idiot
+		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()))
+			canMove =  false;
 
-		boolean returnStatement = true;	
+		if(Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1) {
+			canMove =  false;
+		}
 
-		if( startX < finishX && finishY == startY) {
-			for(int i =  startX+1; i < finishX-1; i++) {
-				if (b[i][ finishY] != null) {
-					returnStatement = false;
-					System.out.println("1");
+		//Vertical checking
+		if(Math.abs(to.column - from.column) == 0) {
+			for(int i = 1; i < Math.abs(to.row-from.row); i++) {
+				//down
+				if(to.row > from.row) {
+					if(b[from.row + i][from.column] != null) 
+						canMove =  false;
+				}
+				//up
+				if(to.row < from.row) {
+					if(b[from.row - i][from.column] != null) 
+						canMove =  false;			
 				}
 			}
-		} else if( startX > finishX && finishY == startY) {
-			for(int i =  finishX-1; i > startX+1; i--) {
-				if (b[i][ finishY] != null) {
-					returnStatement = false;
-					System.out.println("2");
+		}
+
+		//Horizontal checking
+		if(Math.abs(to.row - from.row) == 0) {
+			//if it is moving right
+			if(to.column-from.column > 0) {
+				for(int i = 1; i < Math.abs(to.column-from.column); i++) {
+					if(b[from.row][from.column + i] != null) 
+						canMove = false;
+				}
+			}
+			//if it is going left
+			if(to.column-from.column < 0) {
+				for(int i = 1; i < Math.abs(to.column-from.column); i++) {
+					if(b[from.row][from.column - i] != null) 
+						canMove = false;
 				}
 			}
 		}
 
 
-		if( startY < finishY && finishX == startX) {
-			for(int i =  startY+1; i < finishY-1; i++) {
-				if (b[  finishX][i] != null) {
-					returnStatement = false;
-					System.out.println("3");
-				}
-			}
-		} else if( startY > finishY && finishX == startX) {
-			for(int i =  finishY-1; i > startY-1; i--) {
-				if (b[  finishX][i] != null) {
-					returnStatement = false;
-					System.out.println("4");
-				}
-			}
-		}
-
-		/*if(startX != finishX && startY != finishY) {
-			returnStatement = false;
-			System.out.println("5");
-		}*/
-
-		//if(b[  finishX][ finishY] != null) {
-		//	if(b[  finishX][ finishY].getPlayer() ==b[ startX][ startY].getPlayer()){
-		//		returnStatement = false;
-		//	}}
-		if(returnStatement) {
-			returnStatement = validMove(  finishX,   finishY, b);
-		}
-		return returnStatement;
-	}
-
-	public String toString() {
-		return "this is a rook";
-	}
-
-
+		return canMove;
+	}	
 }

@@ -20,9 +20,13 @@ public class pawn extends Piece{
 			canMove=true;
 		}else if(super.getPlayer()==-1&&from.getColumn()==to.getColumn()&&from.getRow()==1&&(from.getRow()==to.getRow()-1||from.getRow()==to.getRow()-2)&&board[to.getRow()][to.getColumn()]==null && Objects.isNull(board[to.row][to.column])&& Objects.isNull(board[to.row-1][to.column])) {
 			canMove=true;
-		}else if(from.getColumn()==to.getColumn()&&from.getRow()==to.getRow()+1 && Objects.isNull(board[to.row][to.column])) {
+		}else if(from.column == to.column && getPlayer() == 1 && from.row == to.row +1 && Objects.isNull(board[to.row][to.column])) {
 
 			canMove=true;
+		}else if(from.column == to.column && getPlayer() == -1 && from.row == to.row -1 && Objects.isNull(board[to.row][to.column])) {
+
+			canMove=true;
+
 		}/*Capturing*/else if((from.getColumn()==to.getColumn()-1||from.getColumn()==to.getColumn()+1)&&from.getRow()==to.getRow()+1&&board[to.getRow()][to.getColumn()]!=null) {
 			canMove=true;
 		}

@@ -47,15 +47,13 @@ public class Queen extends Piece {
 		double startY = from.getRow();
 		double finishX = to.getColumn();
 		double finishY = to.getRow();
-		
+
 		boolean returnStatement = true;
 		//works, I'm an idiot
-				if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()))
-					returnStatement =  false;
-
-				if(Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1) {
-					returnStatement =  false;
-				}
+		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer())) {
+			returnStatement =  false;
+			System.out.println("JOE");
+		}
 		
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
 			if( startX < finishX && finishY == startY) {
@@ -126,18 +124,18 @@ public class Queen extends Piece {
 				}
 			}
 		}
-		
+
 		if(startX == finishX && startY == finishY) {
 			returnStatement = false;
 			System.out.println("12");
 		}
 
 
-		
+
 
 		return returnStatement;
 	}
-	
+
 	public String toString() {
 		return "this is a queen, YASS";
 	}

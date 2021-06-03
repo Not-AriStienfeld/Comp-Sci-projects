@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -36,7 +37,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		setPreferredSize(new Dimension(SQUARE_WIDTH*8+OFFSET+2,SQUARE_WIDTH*8+OFFSET+2));   // Set these dimensions to the width 
 		board = new Piece[8][8];
 		clickCount = 0;
-		
+
 		//start the board out in the right way
 		board[0][0] = new Rook(-1);
 		board[0][7] = new Rook(-1);
@@ -94,7 +95,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 
 		// instead of drawing a single piece you should loop through the two-dimensional array and draw each piece except for 
 		// empty spaces.
-		
+
 
 
 		for(int i = 0; i < 8;i++) {
@@ -122,15 +123,29 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 			}
 
 		}else{
-			
+
 			System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
 			clickCount  = 0;
-			
+
 			turn*= -1;
 			if(board[startY][startX] != null && board[startY][startX].getPlayer() == turn) {
 				if(board[startY][startX].isValidMove(new Location(startY, startX), new Location( (int) (e.getY()-45)/90, (int) (e.getX() -45)/90), board)) {
-					board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
-					board[startY][startX] = null;
+					if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == 1) {
+						for(int i = 0; i < 8; i++) {
+							for(int j = 0; j < 8; j++) {
+								board[i][j] = new King(-1);
+							}
+						}
+					}else if(!Objects.isNull(board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90])&&board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90].getWon() == -1) {
+						for(int i = 0; i < 8; i++) {
+							for(int j = 0; j < 8; j++) {
+								board[i][j] = new King(1);
+							}
+						}
+					}else {
+						board[(int) (e.getY()-45)/90] [(int) (e.getX() -45)/90]= board[startY][startX];
+						board[startY][startX] = null;
+					}
 				}
 			}
 		}
@@ -159,6 +174,9 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+
+	}
+	public void findKing() {
 
 	}
 

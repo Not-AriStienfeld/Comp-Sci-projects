@@ -64,6 +64,11 @@ public class King extends Piece {
 	public String toString() {
 		return "this is a king";
 	}
+	
+	//allows me to easily distinguish a king from any other peice
+	public int getWon() {
+		return getPlayer();
+	}
 
 
 }

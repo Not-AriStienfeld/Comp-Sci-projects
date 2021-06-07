@@ -88,8 +88,8 @@ public class Queen extends Piece {
 
 					}
 				}
-			
-			//if it is going left
+
+				//if it is going left
 			} else if( startY > finishY && finishX == startX) {
 				for(int i = (int)finishY-1; i > startY-1; i--) {
 					if (b[(int) finishX][i] != null) {
@@ -98,44 +98,46 @@ public class Queen extends Piece {
 					}
 				}
 			}
-			
+
 			//if it is moving as it should
 			if(startX != finishX && startY != finishY) {
 				returnStatement = false;
 
 			}
-		
-		//checks for bishop like movement
-		}else {
-			
-			//repeats for how far it moved
+
+			//checks for bishop like movement
+		}else if(Math.abs(to.row - from.row) == Math.abs(to.column - from.column)){
+
+			//checks diagonals
 			for(int i = 1; i < to.column - from.column; i++) {
 				
 				//checks down right
 				if(to.row > from.row && to.column > from.column) {
 					if(b[from.row + i][from.column + i] != null) 
-						return false;
+						returnStatement = false;
 				}
 				
 				//checks down left
 				else if(to.row > from.row && to.column < from.column) {
 					if(b[from.row + i][from.column - i] != null) 
-						return false;
+						returnStatement = false;
 				}
 				
 				//checks up right
 				else if(to.row < from.row && to.column > from.column) {
 					if(b[from.row - i][from.column + i] != null) 
-						return false;
+						returnStatement = false;
 				}
 				
 				//checks up left
 				else if(to.row < from.row && to.column < from.column) {
 					if(b[from.row - i][from.column - i] != null) 
-						return false;
+						returnStatement = false;
 				}
 
 			}
+		}else {
+			returnStatement = false;
 		}
 
 		//stops the classic queen suicide
@@ -151,7 +153,7 @@ public class Queen extends Piece {
 	}
 
 	public String toString() {
-		return "this is a queen, YASS";
+		return "QUEEN";
 	}
 
 

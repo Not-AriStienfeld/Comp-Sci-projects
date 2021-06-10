@@ -1,8 +1,4 @@
-import java.awt.Component;
-import java.awt.Graphics;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
 //Project Name:Knight
 //Project Description: a cool class that he can't even use lol
 //Date: Jun 10, 2021

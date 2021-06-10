@@ -1,15 +1,12 @@
-import java.awt.Component;
+import java.util.Objects;
+
 //Project Name: Queen
 //Project Description: is a queen. basically an epic remix of rook and bishop
 //Date: Jun 3, 2021
 //Written By: Ari Steinfeld
-import java.awt.Graphics;
-import java.net.URL;
-import java.util.Objects;
 
-import javax.swing.ImageIcon;
 public class Queen extends Piece {
-	private ImageIcon image;			// The ImageIcon will be used to hold the Character's png.
+			// The ImageIcon will be used to hold the Character's png.
 	// This png must be saved in the images folder and will be loaded 
 	// in the constructor.
 
@@ -140,11 +137,7 @@ public class Queen extends Piece {
 			returnStatement = false;
 		}
 
-		//stops the classic queen suicide
-		if(startX == finishX && startY == finishY) {
-			returnStatement = false;
 
-		}
 
 
 

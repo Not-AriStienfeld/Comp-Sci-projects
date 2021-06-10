@@ -1,10 +1,7 @@
-import java.awt.Component;
-import java.awt.Graphics;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
+
 public class King extends Piece {
-	private ImageIcon image;			// The ImageIcon will be used to hold the Character's png.
+		// The ImageIcon will be used to hold the Character's png.
 	// This png must be saved in the images folder and will be loaded 
 	// in the constructor.
 

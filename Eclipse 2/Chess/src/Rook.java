@@ -90,6 +90,6 @@ public class Rook extends Piece{
 	
 	
 	public String toString() {
-		return  "This is a ROOK";
+		return  "ROOK";
 	}
 }

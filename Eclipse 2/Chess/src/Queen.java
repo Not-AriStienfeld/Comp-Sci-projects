@@ -5,6 +5,7 @@ import java.awt.Component;
 //Written By: Ari Steinfeld
 import java.awt.Graphics;
 import java.net.URL;
+import java.util.Objects;
 
 import javax.swing.ImageIcon;
 public class Queen extends Piece {
@@ -60,82 +61,81 @@ public class Queen extends Piece {
 		}
 		//checks if the movement is like a rook
 		if(Math.abs(startY-finishY)!= Math.abs(startX-finishX)) {
-
-			//if it is going down
-			if( startX < finishX && finishY == startY) {
-				for(int i = (int)startX+1; i < finishX-1; i++) {
-					if (b[i][(int)finishY] != null) {
-						returnStatement = false;
-
-					}
-				}
-
-				//if it is going up
-			} else if( startX > finishX && finishY == startY) {
-				for(int i = (int)finishX-1; i > startX+1; i--) {
-					if (b[i][(int)finishY] != null) {
-						returnStatement = false;
-
-					}
-				}
-			}
-
-			//if it is going right
-			if( startY < finishY && finishX == startX) {
-				for(int i = (int)startY+1; i < finishY-1; i++) {
-					if (b[(int) finishX][i] != null) {
-						returnStatement = false;
-
-					}
-				}
-
-				//if it is going left
-			} else if( startY > finishY && finishX == startX) {
-				for(int i = (int)finishY-1; i > startY-1; i--) {
-					if (b[(int) finishX][i] != null) {
-						returnStatement = false;
-
-					}
-				}
-			}
-
-			//if it is moving as it should
-			if(startX != finishX && startY != finishY) {
+			if(to.row != from.row && to.column != from.column)
 				returnStatement = false;
+			if(Math.abs(to.column - from.column) == 0) {
+				for(int i = 1; i < Math.abs(to.row-from.row); i++) {
+					//down
+					if(to.row > from.row && !Objects.isNull(b[from.row + i][from.column])) {
+						returnStatement =  false;
+					}
+					//up
+					if(to.row < from.row && !Objects.isNull(b[from.row - i][from.column])) {
 
+						returnStatement =  false;			
+					}
+				}
+			}
+
+			//Horizontal checking
+			if(Math.abs(to.row - from.row) == 0) {
+				//if it is moving right
+				if(to.column-from.column > 0) {
+					for(int i = 1; i < Math.abs(to.column-from.column); i++) {
+						if(!Objects.isNull(b[from.row][from.column + i])) 
+							returnStatement = false;
+					}
+				}
+				//if it is going left
+				if(to.column-from.column < 0) {
+					for(int i = 1; i < Math.abs(to.column-from.column); i++) {
+						if(!Objects.isNull(b[from.row][from.column - i])) 
+							returnStatement = false;
+					}
+				}
+
+				//if you want to know why the code looks different for left-right vs updown, its because
+				//as I was troubleshooting I tried making them different, until I realized
+				//the issue was in the gpannel
 			}
 
 			//checks for bishop like movement
 		}else if(Math.abs(to.row - from.row) == Math.abs(to.column - from.column)){
 
 			//checks diagonals
-			for(int i = 1; i < to.column - from.column; i++) {
-				
-				//checks down right
-				if(to.row > from.row && to.column > from.column) {
-					if(b[from.row + i][from.column + i] != null) 
+			if(to.row > from.row && to.column > from.column) {
+				for(int i = 1; i < Math.abs(to.row - from.row); i++) {
+					if(b[from.row+i][from.column+i] != null) {
 						returnStatement = false;
-				}
-				
-				//checks down left
-				else if(to.row > from.row && to.column < from.column) {
-					if(b[from.row + i][from.column - i] != null) 
-						returnStatement = false;
-				}
-				
-				//checks up right
-				else if(to.row < from.row && to.column > from.column) {
-					if(b[from.row - i][from.column + i] != null) 
-						returnStatement = false;
-				}
-				
-				//checks up left
-				else if(to.row < from.row && to.column < from.column) {
-					if(b[from.row - i][from.column - i] != null) 
-						returnStatement = false;
-				}
 
+					}
+				}
 			}
+			if(to.row <from.row && to.column < from.column) {
+				for(int i = 1; i < Math.abs(to.row - from.row); i++) {
+					if(b[from.row-i][from.column-i] != null) {
+						returnStatement = false;
+
+					}
+				}
+			}
+			if(to.row > from.row && to.column < from.column) {
+				for(int i = 1; i < Math.abs(to.row - from.row); i++) {
+					if(b[from.row+i][from.column-i] != null) {
+						returnStatement = false;
+
+					}
+				}
+			}
+			if(to.row < from.row && to.column > from.column) {
+				for(int i = 1; i < Math.abs(to.row - from.row); i++) {
+					if(b[from.row-i][from.column+i] != null) {
+						returnStatement = false;
+
+					}
+				}
+			}
+
 		}else {
 			returnStatement = false;
 		}

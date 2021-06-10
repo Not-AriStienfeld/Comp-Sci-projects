@@ -46,12 +46,7 @@ public class King extends Piece {
 		
 
 
-
-		if(Math.abs(to.row - from.row)  > 1 || Math.abs(to.column - from.column)    > 1) {
-			return false;
-			
-		}
-		if(b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == b[from.row][from.column].getPlayer())
+		if(b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == b[from.row][from.column].getPlayer() || (Math.abs(to.row - from.row)  > 1 || Math.abs(to.column - from.column) > 1))
 			return false;
 
 		return true;
@@ -59,7 +54,7 @@ public class King extends Piece {
 	}
 
 	public String toString() {
-		return "this is a king";
+		return "KING";
 	}
 	
 	//allows me to easily distinguish a king from any other peice

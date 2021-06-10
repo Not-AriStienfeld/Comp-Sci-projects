@@ -24,15 +24,11 @@ public class Bishop extends Piece{
 		
 
 		//checks for a self capture
-		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer())) {
+		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()) || Math.abs(to.row - from.row) != Math.abs(to.column - from.column)) {
 			return  false;
 
 		}
 
-		//checks to make sure it is a bishop move
-		if(Math.abs(to.row - from.row) != Math.abs(to.column - from.column)) {
-			return  false;
-		}
 
 		//checks diagonals
 		if(to.row > from.row && to.column > from.column) {

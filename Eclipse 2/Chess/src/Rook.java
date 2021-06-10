@@ -26,25 +26,20 @@ public class Rook extends Piece{
 	//does: checks if move is valid (duh)
 	//working? not quite, can still take own peices
 	public boolean isValidMove(Location from, Location to, Piece[][]b){
-		
-		
-	
+
+
+
 		//I decided to take this approach because it would help me troubleshoot by being able to find multiple errors is one move.
 		boolean canMove = true;
-		
-		//makes sure it is a valid rook move and not a random click
-		if(to.row != from.row && to.column != from.column)
-			canMove = false;
-		
-		
-		//works, I'm an idiot
-		if((b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()))
-			canMove =  false;
 
-		//gonna be honest, I shouldn't need this here, but the code doesn't really work if I remove it. 
-		if(Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1) {
-			canMove =  false;
-		}
+		//makes sure it is a valid rook move and not a random click
+		if(to.row != from.row && to.column != from.column 
+				||/* checks for self capture*/ (b[to.row][to.column] != null && b[to.row][to.column].getPlayer() == getPlayer()) 
+				||/*not sure why this is here, but the code breaks if it isn't*/ Math.abs(to.column - from.column) == 1 && Math.abs(to.row - from.row) == 1)
+			canMove = false;
+
+
+		
 
 		//Vertical checking
 		if(Math.abs(to.column - from.column) == 0) {
@@ -78,7 +73,7 @@ public class Rook extends Piece{
 						canMove = false;
 				}
 			}
-			
+
 			//if you want to know why the code looks different for left-right vs updown, its because
 			//as I was troubleshooting I tried making them different, until I realized
 			//the issue was in the gpannel
@@ -87,8 +82,8 @@ public class Rook extends Piece{
 
 		return canMove;
 	}	
-	
-	
+
+
 	public String toString() {
 		return  "ROOK";
 	}

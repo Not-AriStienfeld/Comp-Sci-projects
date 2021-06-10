@@ -142,8 +142,8 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 
 			//selecting a piece
 			if (clickCount == 0) {
-				startX = (int) (e.getX() -45)/90;
-				startY = (int) (e.getY()-45)/90;
+				startX = (int) (e.getX() -30)/90;
+				startY = (int) (e.getY()-30)/90;
 				clickCount = 1;
 				System.out.println("selected " + startX + ", " + startY);
 				if(board[startY][startX] != null){
@@ -155,7 +155,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 				//choosing where you want to go
 			}else{
 
-				System.out.println("clicked " + (e.getX() -45)/90 + ", " + (e.getY()-45)/90);
+				System.out.println("clicked " + (e.getX() -30)/90 + ", " + (e.getY()-30)/90);
 				clickCount  = 0;
 				turn*= -1;
 

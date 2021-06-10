@@ -210,7 +210,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 		for(int i = 0; i <= 7; i++) {
 
 			//checks to see if there is a pawn on the black end of the board
-			if(board[0][i] != null && board[0][i].toString().equals("PAWN")) {
+			if(board[0][i] != null && board[0][i].toString().equals("pawn")) {
 
 				//gets user input
 				System.out.println("what peice do you want to upgrade to?");
@@ -236,7 +236,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 
 			}
 			//checks to see if there is a pawn on the white end of the board
-			if(board[7][i] != null && board[7][i].toString().equals("PAWN")) {
+			if(board[7][i] != null && board[7][i].toString().equals("pawn")) {
 
 				//gets user input
 				System.out.println("what peice do you want to upgrade to?");

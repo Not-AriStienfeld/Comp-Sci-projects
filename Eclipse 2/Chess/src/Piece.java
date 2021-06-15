@@ -100,6 +100,8 @@ public class Piece {
 
 		return condition;
 	}
+
+	
 	
 	//makes it so no other peice identifies as a king
 	public int getWon() {

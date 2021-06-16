@@ -186,7 +186,7 @@ public class GraphicsPanel extends JPanel implements MouseListener{
 							//if the move is valid but the piece isn't a king, then normalness ensues. 
 							board[(int) (e.getY()-30)/90] [(int) (e.getX() -30)/90]= board[startY][startX];
 							board[startY][startX] = null;
-						}
+						} //hu
 					}
 				}
 				if(turn == -1) {

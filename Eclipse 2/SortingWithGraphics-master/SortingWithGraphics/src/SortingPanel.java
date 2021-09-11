@@ -25,7 +25,7 @@ public class SortingPanel extends JPanel{
 	private static final int WIDTH = 1200;					// The width of the panel
 	private static final int HEIGHT = 700;					// The height of the panel
 
-	private static final String FILE_NAME = "50numbers.txt"; // This String is used by the createArray() function to get 
+	private static final String FILE_NAME = "numbers5.txt"; // This String is used by the createArray() function to get 
 	// integers from a text file. You can change this value to 
 	// a different file name if you want to read from a file
 	// that has more or less numbers.
